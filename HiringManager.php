@@ -21,92 +21,138 @@
   Next, we have some sample HTML code that will appear when you run
   this script.
  -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>CS304 Project</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<p>If you wish to reset the table, press the reset button.
-   If this is the first time that you're running this page,
-   you MUST use reset.</p>
-
-<form method="POST" action="HiringManager.php">
-   <p><input type="submit" value="Reset" name="reset"></p>
-</form>
-
-<p>Insert values into tab1 below:</p>
-<p><font size="2">
-Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-LastName</font></p>
-<form method="POST" action="HiringManager.php">
-<!-- refreshes page when submitted -->
-
-   <p><input type="text" name="insNo" size="6">
-      <input type="text" name="insName"size="18">
-      <input type="text" name="insLastName" size="18">
-<!-- Define two variables to pass values. -->
-      <input type="submit" value="insert" name="insertsubmit"></p>
-</form>
-
-<!-- Create a form to pass the values.
-     See below for how to get the values. -->
-
-<p> Update the name by inserting the old and new values below: </p>
-<p><font size="2">
-Old Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-New Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Old LastName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-New LastName</font></p>
-<form method="POST" action="HiringManager.php">
-<!-- refreshes page when submitted -->
-
-   <p><input type="text" name="oldName" size="18">
-     <input type="text" name="newName"size="18">
-     <input type="text" name="oldLastName" size="18">
-       <input type="text" name="newLastName"size="18">
-<!-- Define two variables to pass values. -->
-
-<input type="submit" value="update" name="updatesubmit"></p>
-<input type="submit" value="run hardcoded queries" name="dostuff"></p>
-</form>
-
-<p> Delete the name to delete tuple: </p>
-<p><font size="2">
-Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</font></p>
-<form method="POST" action="HiringManager.php">
-<!-- refreshes page when submitted -->
-
-   <p><input type="text" name="deleteName" size="18">
-<!-- Define two variables to pass values. -->
-
-      <input type="submit" value="delete" name="deletesubmit"></p>
-    </p>
-</form>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+ <link rel="stylesheet" href="index.css">
 
 
-<html>
-<style>
-    table {
-        width: 20%;
-        border: 1px solid black;
-    }
+ <!-- Navigation -->
+ <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+   <!-- Brand -->
+   <a class="navbar-brand" href="https://www.students.cs.ubc.ca/~darvey6/index.html">CS304 Project</a>
 
-    th {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: .7em;
-        background: #666;
-        color: #FFF;
-        padding: 2px 6px;
-        border-collapse: separate;
-        border: 1px solid #000;
-    }
+   <!-- Toggler/collapsibe Button -->
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+     <span class="navbar-toggler-icon"></span>
+   </button>
 
-    td {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: .7em;
-        border: 1px solid #DDD;
-        color: black;
-    }
-</style>
-</html>
+   <!-- Navbar links -->
+   <div class="collapse navbar-collapse" id="collapsibleNavbar">
+     <ul class="navbar-nav">
+       <li class="nav-item">
+         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/HiringManager.php">Hiring Manager</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/Applicant.php">Applicant</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/Recruiter.php">Recruiter</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/HuimanResource.php">Human Resource</a>
+       </li>
+     </ul>
+   </div>
+ </nav>
+
+
+<div class="w3-content w3-container w3-padding-64">
+ <p>If you wish to reset the table, press the reset button.
+    If this is the first time that you're running this page,
+    you MUST use reset.</p>
+
+ <form method="POST" action="HiringManager.php">
+    <p><input type="submit" value="Reset" name="reset"></p>
+ </form>
+
+ <p>Insert values into tab1 below:</p>
+ <p><font size="2">
+ Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ LastName</font></p>
+ <form method="POST" action="HiringManager.php">
+ <!-- refreshes page when submitted -->
+
+    <p><input type="text" name="insNo" size="6">
+       <input type="text" name="insName"size="18">
+       <input type="text" name="insLastName" size="18">
+ <!-- Define two variables to pass values. -->
+       <input type="submit" value="insert" name="insertsubmit"></p>
+ </form>
+
+ <!-- Create a form to pass the values.
+      See below for how to get the values. -->
+
+ <p> Update the name by inserting the old and new values below: </p>
+ <p><font size="2">
+ Old Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ New Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ Old LastName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ New LastName</font></p>
+ <form method="POST" action="HiringManager.php">
+ <!-- refreshes page when submitted -->
+
+    <p><input type="text" name="oldName" size="18">
+      <input type="text" name="newName"size="18">
+      <input type="text" name="oldLastName" size="18">
+        <input type="text" name="newLastName"size="18">
+ <!-- Define two variables to pass values. -->
+
+ <input type="submit" value="update" name="updatesubmit"></p>
+ <input type="submit" value="run hardcoded queries" name="dostuff"></p>
+ </form>
+
+ <p> Delete the name to delete tuple: </p>
+ <p><font size="2">
+ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </font></p>
+ <form method="POST" action="HiringManager.php">
+ <!-- refreshes page when submitted -->
+
+    <p><input type="text" name="deleteName" size="18">
+ <!-- Define two variables to pass values. -->
+
+       <input type="submit" value="delete" name="deletesubmit"></p>
+     </p>
+ </form>
+</div>
+
+
+ <html>
+ <style>
+     table {
+         width: 20%;
+         border: 1px solid black;
+     }
+
+     th {
+         font-family: Arial, Helvetica, sans-serif;
+         font-size: .7em;
+         background: #666;
+         color: #FFF;
+         padding: 2px 6px;
+         border-collapse: separate;
+         border: 1px solid #000;
+     }
+
+     td {
+         font-family: Arial, Helvetica, sans-serif;
+         font-size: .7em;
+         border: 1px solid #DDD;
+         color: black;
+     }
+ </style>
+ </html>
 
 
 

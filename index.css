@@ -4,7 +4,27 @@ body, html {
     color: #black;
     line-height: 1.8;
   }
+  table {
+      width: 20%;
+      border: 1px solid black;
+  }
 
+  th {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .7em;
+      background: #666;
+      color: #FFF;
+      padding: 2px 6px;
+      border-collapse: separate;
+      border: 1px solid #000;
+  }
+
+  td {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .7em;
+      border: 1px solid #DDD;
+      color: black;
+  }
 /* Create a Parallax Effect */
 .bgimg-0, .bgimg-1, .bgimg-2, .bgimg-3 {
     background-attachment: fixed;
@@ -16,6 +36,12 @@ body, html {
 .bgimg-0 {
     background-image: url('./alumni.jpg');
     min-height: 100%;
+}
+
+.img1 {
+    background-image: url('./alumni.jpg');
+    min-height: 100%;
+    background-size: cover;
 }
 /* First image (Logo. Full height) */
 .bgimg-1 {
