@@ -21,7 +21,65 @@
   Next, we have some sample HTML code that will appear when you run
   this script.
  -->
+ <html>
+ <head>
+ 	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<title>CS304 Project</title>
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+ </head>
+
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>CS304 Project</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+ <!-- Navigation -->
+ <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+   <!-- Brand -->
+   <a class="navbar-brand" href="https://www.students.cs.ubc.ca/~darvey6/index.html">CS304 Project</a>
+
+   <!-- Toggler/collapsibe Button -->
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+     <span class="navbar-toggler-icon"></span>
+   </button>
+
+   <!-- Navbar links -->
+   <div class="collapse navbar-collapse" id="collapsibleNavbar">
+     <ul class="navbar-nav">
+       <li class="nav-item">
+         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/HiringManager.php">Hiring Manager</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/Applicant.php">Applicant</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/Recruiter.php">Recruiter</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/HumanResource.php">Human Resource</a>
+       </li>
+     </ul>
+   </div>
+ </nav>
+
+
+<div class="w3-content w3-container w3-padding-64" id="about">
 <p>If you wish to reset the table, press the reset button.
    If this is the first time that you're running this page,
    you MUST use reset.</p>
@@ -80,9 +138,8 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <input type="submit" value="delete" name="deletesubmit"></p>
     </p>
 </form>
+</div>
 
-
-<html>
 <style>
     table {
         width: 20%;
