@@ -30,17 +30,17 @@
    <p><input type="submit" value="Reset" name="reset"></p>
 </form>
 
-<p>Insert values into tab1 below:</p>
-<p><font size="2">
-Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-LastName</font></p>
+<h1>Human Resource</h1>
+<p>Insert HRid and Name into tab below</p>
+<p>
+HRid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Name
+</p>
 <form method="POST" action="HumanResource.php">
 <!-- refreshes page when submitted -->
 
-   <p><input type="text" name="insNo" size="6">
-      <input type="text" name="insName"size="18">
-      <input type="text" name="insLastName" size="18">
+   <p><input type="text" name="HRid" size="6">
+      <input type="text" name="HRName"size="24">
 <!-- Define two variables to pass values. -->
       <input type="submit" value="insert" name="insertsubmit"></p>
 </form>
@@ -48,12 +48,12 @@ LastName</font></p>
 <!-- Create a form to pass the values.
      See below for how to get the values. -->
 
-<p> Update the name by inserting the old and new values below: </p>
-<p><font size="2">
-Old Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-New Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Old LastName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-New LastName</font></p>
+<p> Create offer below: </p>
+<p>
+Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Salary</font></p>
 <form method="POST" action="HumanResource.php">
 <!-- refreshes page when submitted -->
 
@@ -297,7 +297,7 @@ if ($db_conn) {
 
 		// Create new table...
 		echo "<br> creating new table <br>";
-		executePlainSQL("create table tab1 (nid number, name varchar2(30), lastname varchar2(30), primary key (nid))");
+		executePlainSQL("create table tab1 (HRid number, HRname varchar2(30), primary key (HRid))");
 		OCICommit($db_conn);
 
 	} else
@@ -305,14 +305,14 @@ if ($db_conn) {
 			// Get values from the user and insert data into
                 // the table.
 			$tuple = array (
-				":bind1" => $_POST['insNo'],
-				":bind2" => $_POST['insName'],
-        ":bind3" => $_POST['insLastName']
+				":bind1" => $_POST['HRid'],
+				":bind2" => $_POST['HRName'],
+//        ":bind3" => $_POST['insLastName']
 			);
 			$alltuples = array (
 				$tuple
 			);
-			executeBoundSQL("insert into tab1 values (:bind1, :bind2, :bind3)", $alltuples);
+			executeBoundSQL("insert into tab1 values (:bind1, :bind2)", $alltuples);
 			OCICommit($db_conn);
 
 		} else
@@ -379,7 +379,7 @@ if ($db_conn) {
 		$result = executePlainSQL("select * from tab1");
 		/*printResult($result);*/
            /* next two lines from Raghav replace previous line */
-           $columnNames = array("Customer ID#", "First Name", "Last Name");
+           $columnNames = array("HR ID#", "HR Name");
            printTable($result, $columnNames);
 	}
 
