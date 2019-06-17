@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1339d63c-3fd1-4dfe-b275-0d07be1eef31" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HumanResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/HumanResource.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +35,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HumanResource.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="53" column="81" selection-start-line="53" selection-start-column="81" selection-end-line="53" selection-end-column="81" />
+            <state relative-caret-position="285">
+              <caret line="358" column="99" selection-start-line="358" selection-start-column="99" selection-end-line="358" selection-end-column="99" />
               <folding>
                 <element signature="e#1253#1259#0#HTML" expanded="true" />
                 <element signature="e#1259#1265#0#HTML" expanded="true" />
@@ -54,6 +55,10 @@
                 <element signature="e#1815#1821#0#HTML" expanded="true" />
                 <element signature="e#1827#1833#0#HTML" expanded="true" />
                 <element signature="e#1833#1839#0#HTML" expanded="true" />
+                <element signature="e#1840#1846#0#HTML" expanded="true" />
+                <element signature="e#1846#1852#0#HTML" expanded="true" />
+                <element signature="e#1852#1858#0#HTML" expanded="true" />
+                <element signature="e#1858#1864#0#HTML" expanded="true" />
                 <element signature="e#1928#1934#0#HTML" expanded="true" />
                 <element signature="e#1934#1940#0#HTML" expanded="true" />
                 <element signature="e#1940#1946#0#HTML" expanded="true" />
@@ -63,9 +68,9 @@
                 <element signature="e#1977#1983#0#HTML" expanded="true" />
                 <element signature="e#1989#1995#0#HTML" expanded="true" />
                 <element signature="e#2001#2007#0#HTML" expanded="true" />
-                <element signature="e#2013#2019#0#HTML" expanded="true" />
-                <element signature="e#2025#2031#0#HTML" expanded="true" />
-                <element signature="e#2037#2043#0#HTML" expanded="true" />
+                <element signature="e#2743#2749#0#HTML" expanded="true" />
+                <element signature="e#2809#2815#0#HTML" expanded="true" />
+                <element signature="e#2821#2827#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -88,7 +93,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Recruiter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4238" />
+            <state relative-caret-position="263">
+              <caret line="65" selection-start-line="65" selection-end-line="65" selection-end-column="56" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -101,11 +108,20 @@
       <find>lastname</find>
       <find>HRid</find>
       <find>darvey6</find>
-      <find>update</find>
       <find>insert</find>
       <find>hrid</find>
       <find>create ta</find>
       <find>tab1</find>
+      <find>$db_conn</find>
+      <find>hrname</find>
+      <find>printResul</find>
+      <find>$result</find>
+      <find>$name</find>
+      <find>updatesub</find>
+      <find>updateoffer</find>
+      <find>oid</find>
+      <find>update</find>
+      <find>name</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -187,12 +203,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1560668157412</updated>
-      <workItem from="1560668159394" duration="8211000" />
+      <workItem from="1560668159394" duration="13290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8211000" />
+    <option name="totallyTimeSpent" value="13290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="20" y="43" width="1400" height="783" extended-state="0" />
@@ -235,7 +251,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Recruiter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4238" />
+        <state relative-caret-position="263">
+          <caret line="65" selection-start-line="65" selection-end-line="65" selection-end-column="56" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/HiringManager.php">
@@ -247,8 +265,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HumanResource.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="53" column="81" selection-start-line="53" selection-start-column="81" selection-end-line="53" selection-end-column="81" />
+        <state relative-caret-position="285">
+          <caret line="358" column="99" selection-start-line="358" selection-start-column="99" selection-end-line="358" selection-end-column="99" />
           <folding>
             <element signature="e#1253#1259#0#HTML" expanded="true" />
             <element signature="e#1259#1265#0#HTML" expanded="true" />
@@ -267,6 +285,10 @@
             <element signature="e#1815#1821#0#HTML" expanded="true" />
             <element signature="e#1827#1833#0#HTML" expanded="true" />
             <element signature="e#1833#1839#0#HTML" expanded="true" />
+            <element signature="e#1840#1846#0#HTML" expanded="true" />
+            <element signature="e#1846#1852#0#HTML" expanded="true" />
+            <element signature="e#1852#1858#0#HTML" expanded="true" />
+            <element signature="e#1858#1864#0#HTML" expanded="true" />
             <element signature="e#1928#1934#0#HTML" expanded="true" />
             <element signature="e#1934#1940#0#HTML" expanded="true" />
             <element signature="e#1940#1946#0#HTML" expanded="true" />
@@ -276,9 +298,9 @@
             <element signature="e#1977#1983#0#HTML" expanded="true" />
             <element signature="e#1989#1995#0#HTML" expanded="true" />
             <element signature="e#2001#2007#0#HTML" expanded="true" />
-            <element signature="e#2013#2019#0#HTML" expanded="true" />
-            <element signature="e#2025#2031#0#HTML" expanded="true" />
-            <element signature="e#2037#2043#0#HTML" expanded="true" />
+            <element signature="e#2743#2749#0#HTML" expanded="true" />
+            <element signature="e#2809#2815#0#HTML" expanded="true" />
+            <element signature="e#2821#2827#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

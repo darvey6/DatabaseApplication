@@ -49,13 +49,13 @@
 <!-- Create a form to pass the values.
      See below for how to get the values. -->
 
-<p> Create offer below: </p>
-<h4>
-    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<h4> Create offer below: </h4>
+<p>
+    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Job Details
-</h4>
+</p>
 
 <form method="POST" action="HumanResource.php">
     <!-- refreshes page when submitted -->
@@ -67,11 +67,24 @@
         <input type="submit" value="insert" name="insertoffer">
         <!-- Define two variables to pass values. -->
 
-        <input type="submit" value="update" name="updatesubmit"></p>
-    <input type="submit" value="run hardcoded queries" name="dostuff"></p>
+    </p>
 </form>
 
-<p> Delete the name to delete tuple: </p>
+<h4> Update offer below: </h4>
+<p>
+    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Job Details
+</p>
+<form method="POST" action="HumanResource.php">
+    <p>
+        <input type="text" name="oid" size="18">
+        <input type="text" name="newjobdetails" size="72">
+        <input type="submit" value="update" name="updatesubmit">
+    </p>
+</form>
+
+
+<h4> Delete the name to delete tuple: </h4>
 <p><font size="2">
         Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </font></p>
@@ -337,16 +350,13 @@ if ($db_conn) {
             if (array_key_exists('updatesubmit', $_POST)) {
                 // Update tuple using data from user
                 $tuple = array(
-                    ":bind1" => $_POST['oldName'],
-                    ":bind2" => $_POST['newName'],
-                    ":bind3" => $_POST['oldLastName'],
-                    ":bind4" => $_POST['newLastName'],
+                    ":bind1" => $_POST['oid'],
+                    ":bind2" => $_POST['newjobdetails'],
                 );
                 $alltuples = array(
                     $tuple
                 );
-                executeBoundSQL("update tab1 set name=:bind2 where name=:bind1", $alltuples);
-                executeBoundSQL("update tab1 set lastname=:bind4 where lastname=:bind3", $alltuples);
+                executeBoundSQL("update Offer set Jobdetails=:bind2 where Oid=:bind1", $alltuples);
 
                 OCICommit($db_conn);
 
