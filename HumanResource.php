@@ -51,7 +51,7 @@
 
 <h4> Create offer below: </h4>
 <p>
-    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Job Details
@@ -84,17 +84,17 @@
 </form>
 
 
-<h4> Delete the name to delete tuple: </h4>
-<p><font size="2">
-        Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    </font></p>
+<h4> Delete offer below</h4>
+<p>
+        Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
 <form method="POST" action="HumanResource.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="deleteName" size="18">
+    <p><input type="text" name="Oid" size="18">
         <!-- Define two variables to pass values. -->
 
-        <input type="submit" value="delete" name="deletesubmit"></p>
+        <input type="submit" value="delete" name="deleteOffer"></p>
     </p>
 </form>
 
@@ -318,7 +318,9 @@ if ($db_conn) {
 
         // Create new table...
         echo "<br> creating new table <br>";
-        executePlainSQL("create table HR (HRid number, HRname varchar2(30), primary key (HRid))");
+        executePlainSQL("create table HR (HRid number,
+                                                 HRname varchar2(30), 
+                                                 primary key (HRid))");
         OCICommit($db_conn);
 
         echo "<br> creating new table <br>";
@@ -361,43 +363,18 @@ if ($db_conn) {
                 OCICommit($db_conn);
 
             } else
-                if (array_key_exists('deletesubmit', $_POST)) {
+                if (array_key_exists('deleteOffer', $_POST)) {
                     // Update tuple using data from user
                     $tuple = array(
-                        ":bind1" => $_POST['deleteName'],
+                        ":bind1" => $_POST['Oid'],
                     );
                     $alltuples = array(
                         $tuple
                     );
-                    executeBoundSQL("delete from tab1 where name=:bind1", $alltuples);
+                    executeBoundSQL("delete from Offer where Oid=:bind1", $alltuples);
 
                     OCICommit($db_conn);
                 } else
-                    if (array_key_exists('dostuff', $_POST)) {
-                        // Insert data into table...
-                        executePlainSQL("insert into tab1 values (10, 'Frank', 'Smith')");
-                        // Insert data into table using bound variables
-                        $list1 = array(
-                            ":bind1" => 6,
-                            ":bind2" => "All",
-                            ":bind3" => "Howe"
-                        );
-                        $list2 = array(
-                            ":bind1" => 7,
-                            ":bind2" => "John",
-                            ":bind3" => "Snow"
-                        );
-                        $allrows = array(
-                            $list1,
-                            $list2
-                        );
-                        executeBoundSQL("insert into tab1 values (:bind1, :bind2, :bind3)", $allrows); //the function takes a list of lists
-                        // Update data...
-                        //executePlainSQL("update tab1 set nid=10 where nid=2");
-                        // Delete data...
-                        //executePlainSQL("delete from tab1 where nid=1");
-                        OCICommit($db_conn);
-                    } else
                         if (array_key_exists('insertoffer', $_POST)) {
                             // Get values from the user and insert data into
                             // the table.

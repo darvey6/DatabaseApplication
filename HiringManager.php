@@ -21,125 +21,85 @@
   Next, we have some sample HTML code that will appear when you run
   this script.
  -->
- <html>
- <head>
- 	<meta charset="utf-8">
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<title>CS304 Project</title>
- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
- 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
- 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
- </head>
-
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <title>CS304 Project</title>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
- <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
- <!-- Navigation -->
- <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-   <!-- Brand -->
-   <a class="navbar-brand" href="https://www.students.cs.ubc.ca/~darvey6/index.html">CS304 Project</a>
-
-   <!-- Toggler/collapsibe Button -->
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-     <span class="navbar-toggler-icon"></span>
-   </button>
-
-   <!-- Navbar links -->
-   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-     <ul class="navbar-nav">
-       <li class="nav-item">
-         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/HiringManager.php">Hiring Manager</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/Applicant.php">Applicant</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/Recruiter.php">Recruiter</a>
-       </li>
-       <li class="nav-item">
-         <a class="nav-link" href="https://www.students.cs.ubc.ca/~darvey6/HumanResource.php">Human Resource</a>
-       </li>
-     </ul>
-   </div>
- </nav>
-
-
-<div class="w3-content w3-container w3-padding-64" id="about">
 <p>If you wish to reset the table, press the reset button.
-   If this is the first time that you're running this page,
-   you MUST use reset.</p>
+    If this is the first time that you're running this page,
+    you MUST use reset.</p>
 
 <form method="POST" action="HiringManager.php">
-   <p><input type="submit" value="Reset" name="reset"></p>
+    <p><input type="submit" value="Reset" name="reset"></p>
 </form>
 
-<p>Insert values into tab1 below:</p>
-<p><font size="2">
-Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-LastName</font></p>
+<h1>Human Resource</h1>
+<h4>Insert HRid and Name into tab below:</h4>
+<p>
+    HRid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Name
+</p>
 <form method="POST" action="HiringManager.php">
-<!-- refreshes page when submitted -->
+    <!-- refreshes page when submitted -->
 
-   <p><input type="text" name="insNo" size="6">
-      <input type="text" name="insName"size="18">
-      <input type="text" name="insLastName" size="18">
-<!-- Define two variables to pass values. -->
-      <input type="submit" value="insert" name="insertsubmit"></p>
+    <p><input type="text" name="hrid" size="6">
+        <input type="text" name="hrname" size="24">
+        <!-- Define two variables to pass values. -->
+        <input type="submit" value="insert" name="inserthr"></p>
 </form>
+
 
 <!-- Create a form to pass the values.
      See below for how to get the values. -->
 
-<p> Update the name by inserting the old and new values below: </p>
-<p><font size="2">
-Old Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-New Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Old LastName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-New LastName</font></p>
+<h4> Create offer below: </h4>
+<p>
+    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Job Details
+</p>
+
 <form method="POST" action="HiringManager.php">
-<!-- refreshes page when submitted -->
+    <!-- refreshes page when submitted -->
 
-   <p><input type="text" name="oldName" size="18">
-     <input type="text" name="newName"size="18">
-     <input type="text" name="oldLastName" size="18">
-       <input type="text" name="newLastName"size="18">
-<!-- Define two variables to pass values. -->
+    <p><input type="text" name="ohrid" size="18">
+        <input type="text" name="oaid" size="18">
+        <input type="text" name="oid" size="18">
+        <input type="text" name="jobdetails" size="72">
+        <input type="submit" value="insert" name="insertoffer">
+        <!-- Define two variables to pass values. -->
 
-<input type="submit" value="update" name="updatesubmit"></p>
-<input type="submit" value="run hardcoded queries" name="dostuff"></p>
-</form>
-
-<p> Delete the name to delete tuple: </p>
-<p><font size="2">
-Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</font></p>
-<form method="POST" action="HiringManager.php">
-<!-- refreshes page when submitted -->
-
-   <p><input type="text" name="deleteName" size="18">
-<!-- Define two variables to pass values. -->
-
-      <input type="submit" value="delete" name="deletesubmit"></p>
     </p>
 </form>
-</div>
 
+<h4> Update offer below: </h4>
+<p>
+    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Job Details
+</p>
+<form method="POST" action="HiringManager.php">
+    <p>
+        <input type="text" name="oid" size="18">
+        <input type="text" name="newjobdetails" size="72">
+        <input type="submit" value="update" name="updatesubmit">
+    </p>
+</form>
+
+
+<h4> Delete offer below</h4>
+<p>
+    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+<form method="POST" action="HiringManager.php">
+    <!-- refreshes page when submitted -->
+
+    <p><input type="text" name="Oid" size="18">
+        <!-- Define two variables to pass values. -->
+
+        <input type="submit" value="delete" name="deleteOffer"></p>
+    </p>
+</form>
+
+
+<html>
 <style>
     table {
         width: 20%;
@@ -166,7 +126,6 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </html>
 
 
-
 <?php
 
 /* This tells the system that it's no longer just parsing
@@ -176,91 +135,94 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 // there are no errors
 $success = True;
 $db_conn = OCILogon("ora_darvey6", "a16444144",
-                    "dbhost.students.cs.ubc.ca:1522/stu");
+    "dbhost.students.cs.ubc.ca:1522/stu");
 
-function executePlainSQL($cmdstr) {
-     // Take a plain (no bound variables) SQL command and execute it.
-	//echo "<br>running ".$cmdstr."<br>";
-	global $db_conn, $success;
-	$statement = OCIParse($db_conn, $cmdstr);
-     // There is a set of comments at the end of the file that
-     // describes some of the OCI specific functions and how they work.
+function executePlainSQL($cmdstr)
+{
+    // Take a plain (no bound variables) SQL command and execute it.
+    //echo "<br>running ".$cmdstr."<br>";
+    global $db_conn, $success;
+    $statement = OCIParse($db_conn, $cmdstr);
+    // There is a set of comments at the end of the file that
+    // describes some of the OCI specific functions and how they work.
 
-	if (!$statement) {
-		echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
-		$e = OCI_Error($db_conn);
-           // For OCIParse errors, pass the connection handle.
-		echo htmlentities($e['message']);
-		$success = False;
-	}
+    if (!$statement) {
+        echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
+        $e = OCI_Error($db_conn);
+        // For OCIParse errors, pass the connection handle.
+        echo htmlentities($e['message']);
+        $success = False;
+    }
 
-	$r = OCIExecute($statement, OCI_DEFAULT);
-	if (!$r) {
-		echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
-		$e = oci_error($statement);
-           // For OCIExecute errors, pass the statement handle.
-		echo htmlentities($e['message']);
-		$success = False;
-	} else {
+    $r = OCIExecute($statement, OCI_DEFAULT);
+    if (!$r) {
+        echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
+        $e = oci_error($statement);
+        // For OCIExecute errors, pass the statement handle.
+        echo htmlentities($e['message']);
+        $success = False;
+    } else {
 
-	}
-	return $statement;
+    }
+    return $statement;
 
 }
 
-function executeBoundSQL($cmdstr, $list) {
-	/* Sometimes the same statement will be executed several times.
+function executeBoundSQL($cmdstr, $list)
+{
+    /* Sometimes the same statement will be executed several times.
         Only the value of variables need to be changed.
-	   In this case, you don't need to create the statement several
+       In this case, you don't need to create the statement several
         times.  Using bind variables can make the statement be shared
         and just parsed once.
         This is also very useful in protecting against SQL injection
         attacks.  See the sample code below for how this function is
         used. */
 
-	global $db_conn, $success;
-	$statement = OCIParse($db_conn, $cmdstr);
+    global $db_conn, $success;
+    $statement = OCIParse($db_conn, $cmdstr);
 
-	if (!$statement) {
-		echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
-		$e = OCI_Error($db_conn);
-		echo htmlentities($e['message']);
-		$success = False;
-	}
+    if (!$statement) {
+        echo "<br>Cannot parse this command: " . $cmdstr . "<br>";
+        $e = OCI_Error($db_conn);
+        echo htmlentities($e['message']);
+        $success = False;
+    }
 
-	foreach ($list as $tuple) {
-		foreach ($tuple as $bind => $val) {
-			//echo $val;
-			//echo "<br>".$bind."<br>";
-			OCIBindByName($statement, $bind, $val);
-			unset ($val); // Make sure you do not remove this.
-                              // Otherwise, $val will remain in an
-                              // array object wrapper which will not
-                              // be recognized by Oracle as a proper
-                              // datatype.
-		}
-		$r = OCIExecute($statement, OCI_DEFAULT);
-		if (!$r) {
-			echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
-			$e = OCI_Error($statement);
-                // For OCIExecute errors pass the statement handle
-			echo htmlentities($e['message']);
-			echo "<br>";
-			$success = False;
-		}
-	}
+    foreach ($list as $tuple) {
+        foreach ($tuple as $bind => $val) {
+            //echo $val;
+            //echo "<br>".$bind."<br>";
+            OCIBindByName($statement, $bind, $val);
+            unset ($val); // Make sure you do not remove this.
+            // Otherwise, $val will remain in an
+            // array object wrapper which will not
+            // be recognized by Oracle as a proper
+            // datatype.
+        }
+        $r = OCIExecute($statement, OCI_DEFAULT);
+        if (!$r) {
+            echo "<br>Cannot execute this command: " . $cmdstr . "<br>";
+            $e = OCI_Error($statement);
+            // For OCIExecute errors pass the statement handle
+            echo htmlentities($e['message']);
+            echo "<br>";
+            $success = False;
+        }
+    }
 
 }
 
-function printResult($result) { //prints results from a select statement
-	echo "<br>Got data from table tab1:<br>";
-	echo "<table>";
-	echo "<tr><th>ID</th><th>Name</th></tr>";
+function printResult($result)
+{ //prints results from a select statement
+    echo "<br>Got data from table tab1:<br>";
+    echo "<table>";
+    echo "<tr><th>ID</th><th>Name</th></tr>";
 
-	while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-		echo "<tr><td>" . $row["NID"] . "</td><td>" . $row["NAME"] . "</td></tr>"; //or just use "echo $row[0]"
-	}
-	echo "</table>";
+    while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+        echo "<tr><td>" . $row["NID"] . "</td><td>" . $row["NAME"] . "</td></tr>"; //or just use "echo $row[0]"
+    }
+    echo "</table>";
 }
 
 
@@ -342,110 +304,117 @@ function printTable($resultFromSQL, $namesOfColumnsArray)
 }
 
 
-
-
 // Connect Oracle...
 if ($db_conn) {
 
-	if (array_key_exists('reset', $_POST)) {
-		// Drop old table...
-		echo "<br> dropping table <br>";
-		executePlainSQL("Drop table tab1");
+    if (array_key_exists('reset', $_POST)) {
+        // Drop old table...
+        echo "<br> dropping table <br>";
+        executePlainSQL("Drop table Offer");
 
-		// Create new table...
-		echo "<br> creating new table <br>";
-		executePlainSQL("create table tab1 (nid number, name varchar2(30), lastname varchar2(30), primary key (nid))");
-		OCICommit($db_conn);
+        echo "<br> dropping table <br>";
+        executePlainSQL("Drop table HR");
 
-	} else
-		if (array_key_exists('insertsubmit', $_POST)) {
-			// Get values from the user and insert data into
-                // the table.
-			$tuple = array (
-				":bind1" => $_POST['insNo'],
-				":bind2" => $_POST['insName'],
-        ":bind3" => $_POST['insLastName']
-			);
-			$alltuples = array (
-				$tuple
-			);
-			executeBoundSQL("insert into tab1 values (:bind1, :bind2, :bind3)", $alltuples);
-			OCICommit($db_conn);
 
-		} else
-			if (array_key_exists('updatesubmit', $_POST)) {
-				// Update tuple using data from user
-				$tuple = array (
-					":bind1" => $_POST['oldName'],
-					":bind2" => $_POST['newName'],
-          ":bind3" => $_POST['oldLastName'],
-          ":bind4" => $_POST['newLastName'],
-				);
-				$alltuples = array (
-					$tuple
-				);
-				executeBoundSQL("update tab1 set name=:bind2 where name=:bind1", $alltuples);
-        executeBoundSQL("update tab1 set lastname=:bind4 where lastname=:bind3", $alltuples);
+        // Create new table...
+        echo "<br> creating new table <br>";
+        executePlainSQL("create table HR (HRid number,
+                                                 HRname varchar2(30), 
+                                                 primary key (HRid))");
+        OCICommit($db_conn);
 
-				OCICommit($db_conn);
+        echo "<br> creating new table <br>";
+        executePlainSQL("create table Offer (HRid number, 
+                                                    Aid number,
+                                                    Oid number,
+                                                    Jobdetails varchar2(80), 
+                                                    primary key (HRid, Oid),
+                                                    foreign key (HRid) references HR on delete cascade)");
+        OCICommit($db_conn);
 
-			} else
-  			if (array_key_exists('deletesubmit', $_POST)) {
-  				// Update tuple using data from user
-  				$tuple = array (
-  					":bind1" => $_POST['deleteName'],
-  				);
-  				$alltuples = array (
-  					$tuple
-  				);
-  				executeBoundSQL("delete from tab1 where name=:bind1", $alltuples);
 
-  				OCICommit($db_conn);
+
+    } else
+        if (array_key_exists('inserthr', $_POST)) {
+            // Get values from the user and insert data into
+            // the table.
+            $tuple = array(
+                ":bind1" => $_POST['hrid'],
+                ":bind2" => $_POST['hrname'],
+            );
+            $alltuples = array(
+                $tuple
+            );
+            executeBoundSQL("insert into HR values (:bind1, :bind2)", $alltuples);
+            OCICommit($db_conn);
+
         } else
-				if (array_key_exists('dostuff', $_POST)) {
-					// Insert data into table...
-					executePlainSQL("insert into tab1 values (10, 'Frank', 'Smith')");
-					// Insert data into table using bound variables
-					$list1 = array (
-						":bind1" => 6,
-						":bind2" => "All",
-            ":bind3" => "Howe"
-					);
-					$list2 = array (
-						":bind1" => 7,
-						":bind2" => "John",
-            ":bind3" => "Snow"
-					);
-					$allrows = array (
-						$list1,
-						$list2
-					);
-					executeBoundSQL("insert into tab1 values (:bind1, :bind2, :bind3)", $allrows); //the function takes a list of lists
-		// Update data...
-		//executePlainSQL("update tab1 set nid=10 where nid=2");
-		// Delete data...
-		//executePlainSQL("delete from tab1 where nid=1");
-		OCICommit($db_conn);
-		}
+            if (array_key_exists('updatesubmit', $_POST)) {
+                // Update tuple using data from user
+                $tuple = array(
+                    ":bind1" => $_POST['oid'],
+                    ":bind2" => $_POST['newjobdetails'],
+                );
+                $alltuples = array(
+                    $tuple
+                );
+                executeBoundSQL("update Offer set Jobdetails=:bind2 where Oid=:bind1", $alltuples);
 
-	if ($_POST && $success) {
-		//POST-REDIRECT-GET -- See http://en.wikipedia.org/wiki/Post/Redirect/Get
-		header("location: HiringManager.php");
-	} else {
-		// Select data...
-		$result = executePlainSQL("select * from tab1");
-		/*printResult($result);*/
-           /* next two lines from Raghav replace previous line */
-           $columnNames = array("Customer ID#", "First Name", "Last Name");
-           printTable($result, $columnNames);
-	}
+                OCICommit($db_conn);
 
-	//Commit to save changes...
-	OCILogoff($db_conn);
+            } else
+                if (array_key_exists('deleteOffer', $_POST)) {
+                    // Update tuple using data from user
+                    $tuple = array(
+                        ":bind1" => $_POST['Oid'],
+                    );
+                    $alltuples = array(
+                        $tuple
+                    );
+                    executeBoundSQL("delete from Offer where Oid=:bind1", $alltuples);
+
+                    OCICommit($db_conn);
+                } else
+                    if (array_key_exists('insertoffer', $_POST)) {
+                        // Get values from the user and insert data into
+                        // the table.
+                        $tuple = array(
+                            ":bind1" => $_POST['ohrid'],
+                            ":bind2" => $_POST['oaid'],
+                            ":bind3" => $_POST['oid'],
+                            ":bind4" => $_POST['jobdetails'],
+                        );
+                        $alltuples = array(
+                            $tuple
+                        );
+                        executeBoundSQL("insert into Offer values (:bind1, :bind2, :bind3, :bind4)", $alltuples);
+                        OCICommit($db_conn);
+
+                    }
+
+
+    if ($_POST && $success) {
+        //POST-REDIRECT-GET -- See http://en.wikipedia.org/wiki/Post/Redirect/Get
+        header("location: HiringManager.php");
+    } else {
+        // Select data...
+        $result = executePlainSQL("select * from HR");
+        /*printResult($result);*/
+        /* next two lines from Raghav replace previous line */
+        $columnNames = array("HR ID#", "HR Name");
+        printTable($result, $columnNames);
+        $result = executePlainSQL("select * from Offer");
+        $columnNames = array("HR ID", "Applicant ID", "Offer ID", "Offer Details");
+        printTable($result, $columnNames);
+    }
+
+
+    //Commit to save changes...
+    OCILogoff($db_conn);
 } else {
-	echo "cannot connect";
-	$e = OCI_Error(); // For OCILogon errors pass no handle
-	echo htmlentities($e['message']);
+    echo "cannot connect";
+    $e = OCI_Error(); // For OCILogon errors pass no handle
+    echo htmlentities($e['message']);
 }
 
 /* OCILogon() allows you to log onto the Oracle database
