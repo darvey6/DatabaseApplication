@@ -33,7 +33,7 @@
 <h1>Human Resource</h1>
 <h4>Insert HR ID and Name into tab below:</h4>
 <p>
-    HRid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Name
 </p>
 <form method="POST" action="HumanResource.php">
