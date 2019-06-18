@@ -31,7 +31,7 @@
 </form>
 
 <h1>Human Resource</h1>
-<h4>Insert HRid and Name into tab below:</h4>
+<h4>Insert HR ID and Name into tab below:</h4>
 <p>
     HRid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Name
@@ -39,7 +39,7 @@
 <form method="POST" action="HumanResource.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="hrid" size="6">
+    <p><input type="text" name="hrid" size="18">
         <input type="text" name="hrname" size="24">
         <!-- Define two variables to pass values. -->
         <input type="submit" value="insert" name="inserthr"></p>
@@ -52,6 +52,7 @@
 <h4> Create offer below: </h4>
 <p>
     HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HM ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Job Details
@@ -61,6 +62,7 @@
     <!-- refreshes page when submitted -->
 
     <p><input type="text" name="ohrid" size="18">
+        <input type="text" name="hmid" size="18">
         <input type="text" name="oaid" size="18">
         <input type="text" name="oid" size="18">
         <input type="text" name="jobdetails" size="72">
@@ -325,6 +327,7 @@ if ($db_conn) {
 
         echo "<br> creating new table <br>";
         executePlainSQL("create table Offer (HRid number, 
+                                                    HMid number,
                                                     Aid number,
                                                     Oid number,
                                                     Jobdetails varchar2(80), 
@@ -380,14 +383,15 @@ if ($db_conn) {
                             // the table.
                             $tuple = array(
                                 ":bind1" => $_POST['ohrid'],
-                                ":bind2" => $_POST['oaid'],
-                                ":bind3" => $_POST['oid'],
-                                ":bind4" => $_POST['jobdetails'],
+                                ":bind2" => $_POST['hmid'],
+                                ":bind3" => $_POST['oaid'],
+                                ":bind4" => $_POST['oid'],
+                                ":bind5" => $_POST['jobdetails'],
                             );
                             $alltuples = array(
                                 $tuple
                             );
-                            executeBoundSQL("insert into Offer values (:bind1, :bind2, :bind3, :bind4)", $alltuples);
+                            executeBoundSQL("insert into Offer values (:bind1, :bind2, :bind3, :bind4, :bind5)", $alltuples);
                             OCICommit($db_conn);
 
                         }
@@ -404,7 +408,7 @@ if ($db_conn) {
         $columnNames = array("HR ID#", "HR Name");
         printTable($result, $columnNames);
         $result = executePlainSQL("select * from Offer");
-        $columnNames = array("HR ID", "Applicant ID", "Offer ID", "Offer Details");
+        $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
         printTable($result, $columnNames);
     }
 
