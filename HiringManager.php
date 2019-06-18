@@ -33,18 +33,18 @@
 <h1>Hiring Manager</h1>
 <h4>Insert HM ID, Name, and Department into tab below:</h4>
 <p>
-    HM ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HM ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Department
 </p>
 <form method="POST" action="HiringManager.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="hmid" size="18">
+    <p><input type="text" name="hmid" size="12">
         <input type="text" name="hmname" size="24">
         <input type="text" name="department" size="24">
         <!-- Define two variables to pass values. -->
-        <input type="submit" value="insert" name="inserthr"></p>
+        <input type="submit" value="insert" name="inserthm"></p>
 </form>
 
 
@@ -53,21 +53,21 @@
 
 <h4> Create offer below: </h4>
 <p>
-    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    HM ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HM ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Applicant ID&nbsp;
+    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Job Details
 </p>
 
 <form method="POST" action="HiringManager.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="ohrid" size="18">
-        <input type="text" name="hmid" size="18">
-        <input type="text" name="oaid" size="18">
-        <input type="text" name="oid" size="18">
-        <input type="text" name="jobdetails" size="72">
+    <p><input type="text" name="ohrid" size="12">
+        <input type="text" name="hmid" size="12">
+        <input type="text" name="oaid" size="12">
+        <input type="text" name="oid" size="12">
+        <input type="text" name="jobdetails" size="60">
         <input type="submit" value="insert" name="insertoffer">
         <!-- Define two variables to pass values. -->
 
@@ -317,14 +317,14 @@ if ($db_conn) {
         executePlainSQL("Drop table Offer");
 
         echo "<br> dropping table <br>";
-        executePlainSQL("Drop table HR");
-
+        executePlainSQL("Drop table HM");
 
         // Create new table...
         echo "<br> creating new table <br>";
-        executePlainSQL("create table HR (HRid number,
-                                                 HRname varchar2(30), 
-                                                 primary key (HRid))");
+        executePlainSQL("create table HM (HMid number,
+                                                 HMname varchar2(30),
+                                                 department varchar2(30), 
+                                   1              primary key (HMid))");
         OCICommit($db_conn);
 
         echo "<br> creating new table <br>";
@@ -340,17 +340,18 @@ if ($db_conn) {
 
 
     } else
-        if (array_key_exists('inserthr', $_POST)) {
+        if (array_key_exists('inserthm', $_POST)) {
             // Get values from the user and insert data into
             // the table.
             $tuple = array(
-                ":bind1" => $_POST['hrid'],
-                ":bind2" => $_POST['hrname'],
+                ":bind1" => $_POST['hmid'],
+                ":bind2" => $_POST['hmname'],
+                ":bind3" => $_POST['department'],
             );
             $alltuples = array(
                 $tuple
             );
-            executeBoundSQL("insert into HR values (:bind1, :bind2)", $alltuples);
+            executeBoundSQL("insert into HM values (:bind1, :bind2, :bind3)", $alltuples);
             OCICommit($db_conn);
 
         } else
@@ -404,10 +405,10 @@ if ($db_conn) {
         header("location: HiringManager.php");
     } else {
         // Select data...
-        $result = executePlainSQL("select * from HR");
+        $result = executePlainSQL("select * from HM");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
-        $columnNames = array("HR ID#", "HR Name");
+        $columnNames = array("HR ID#", "HR Name", "Department");
         printTable($result, $columnNames);
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");

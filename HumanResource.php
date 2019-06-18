@@ -39,7 +39,7 @@
 <form method="POST" action="HumanResource.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="hrid" size="18">
+    <p><input type="text" name="hrid" size="12">
         <input type="text" name="hrname" size="24">
         <!-- Define two variables to pass values. -->
         <input type="submit" value="insert" name="inserthr"></p>
@@ -51,21 +51,21 @@
 
 <h4> Create offer below: </h4>
 <p>
-    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    HM ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    HM ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Applicant ID&nbsp;
+    Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Job Details
 </p>
 
 <form method="POST" action="HumanResource.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="ohrid" size="18">
-        <input type="text" name="hmid" size="18">
-        <input type="text" name="oaid" size="18">
-        <input type="text" name="oid" size="18">
-        <input type="text" name="jobdetails" size="72">
+    <p><input type="text" name="ohrid" size="12">
+        <input type="text" name="hmid" size="12">
+        <input type="text" name="oaid" size="12">
+        <input type="text" name="oid" size="12">
+        <input type="text" name="jobdetails" size="60">
         <input type="submit" value="insert" name="insertoffer">
         <!-- Define two variables to pass values. -->
 
@@ -317,12 +317,19 @@ if ($db_conn) {
         echo "<br> dropping table <br>";
         executePlainSQL("Drop table HR");
 
-
         // Create new table...
         echo "<br> creating new table <br>";
         executePlainSQL("create table HR (HRid number,
                                                  HRname varchar2(30), 
                                                  primary key (HRid))");
+        OCICommit($db_conn);
+
+        // Create new table...
+        echo "<br> creating new table <br>";
+        executePlainSQL("create table HM (HMid number,
+                                                 HMname varchar2(30),
+                                                 department varchar2(30), 
+                                                 primary key (HMid))");
         OCICommit($db_conn);
 
         echo "<br> creating new table <br>";
