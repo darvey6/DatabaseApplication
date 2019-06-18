@@ -1,35 +1,3 @@
-<!--Oracle/PHP test file for UBC CPSC 304.
-  Created by Jiemin Zhang, 2011.
-  Modified by Simona Radu, Raghav Thakur, Ed Knorr, and others.
-
-  This file shows the very basics of how to execute PHP commands
-  on Oracle.
-
-  Specifically, it will drop a table, create a table, insert values,
-  update values, and perform select queries.
-
-  NOTE:  If you have a table called "tab1", it will be destroyed
-         by this sample program.
-
-  The script assumes you already have a server set up.
-  All OCI commands are commands to the Oracle libraries.
-  To get the file to work, you must place it somewhere where your
-  Apache server can run it, and you must rename it to have a ".php"
-  extension.  You must also change the username and password on the
-  OCILogon below to be your own ORACLE username and password.
-
-  Next, we have some sample HTML code that will appear when you run
-  this script.
- -->
-
-<p>If you wish to reset the table, press the reset button.
-    If this is the first time that you're running this page,
-    you MUST use reset.</p>
-
-<form method="POST" action="HiringManager.php">
-    <p><input type="submit" value="Reset" name="reset"></p>
-</form>
-
 <h1>Hiring Manager</h1>
 <h4>Insert HM ID, Name, and Department into tab below:</h4>
 <p>
@@ -40,11 +8,11 @@
 <form method="POST" action="HiringManager.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="hmid" size="12">
-        <input type="text" name="hmname" size="24">
+    <p><input type="text" name="hrid" size="12">
+        <input type="text" name="hrname" size="24">
         <input type="text" name="department" size="24">
         <!-- Define two variables to pass values. -->
-        <input type="submit" value="insert" name="inserthm"></p>
+        <input type="submit" value="insert" name="inserthr"></p>
 </form>
 
 
@@ -76,12 +44,14 @@
 
 <h4> Update offer below: </h4>
 <p>
+    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Offer ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Job Details
 </p>
 <form method="POST" action="HiringManager.php">
     <p>
-        <input type="text" name="oid" size="18">
+        <input type="text" name="HRid" size="12">
+        <input type="text" name="oid" size="12">
         <input type="text" name="newjobdetails" size="72">
         <input type="submit" value="update" name="updatesubmit">
     </p>
@@ -132,11 +102,6 @@
 
 <?php
 
-/* This tells the system that it's no longer just parsing
-   HTML; it's now parsing PHP. */
-
-// keep track of errors so it redirects the page only if
-// there are no errors
 $success = True;
 $db_conn = OCILogon("ora_darvey6", "a16444144",
     "dbhost.students.cs.ubc.ca:1522/stu");
@@ -174,15 +139,6 @@ function executePlainSQL($cmdstr)
 
 function executeBoundSQL($cmdstr, $list)
 {
-    /* Sometimes the same statement will be executed several times.
-        Only the value of variables need to be changed.
-       In this case, you don't need to create the statement several
-        times.  Using bind variables can make the statement be shared
-        and just parsed once.
-        This is also very useful in protecting against SQL injection
-        attacks.  See the sample code below for how this function is
-        used. */
-
     global $db_conn, $success;
     $statement = OCIParse($db_conn, $cmdstr);
 
@@ -230,57 +186,6 @@ function printResult($result)
 }
 
 
-/*
-Function printTable created by Raghav Thakur on 2018-11-15.
-
-Input:  takes in a result returned from your SQL query and an array of
-        strings of the column names
-Output: prints an HTML table of the results returned from your SQL query.
-
-printTable is an easy way to iteratively print the columns of a table,
-instead of having to manually print out each column which can be
-cumbersome and lead to duplicate code all over the place.
-
-If you will be making calls to printTable multiple times and intend to
-use it for multiple php files, please do the following:
-
-Step 1) Create a new php file and copy the printTable function and the
-        associated HTML styling code into the file you created, give
-        this file a meaningful name such as 'print-table.php'.
-        (Search for "style" above.)
-
-Step 2) In whichever file you want to use the printTable function,
-        assuming this file also contains the server code to communicate
-        with the database:  Type in "include 'print-table.php'" without
-        double quotes.  If the file in which you want to use printTable
-        is not in the root directory, you'll need to specify the path of
-        root directory where 'print-table.php' is.  As an example:
-        "include '../print-table.php'" without double quotes.
-
-Step 3) You can now make calls to the printTable function without
-        needing to redeclare it in your current file.
-
-Note:  You can move all the server code into a separate file called
-       'server.php' in a similar way, except whichever file needs to
-       use the server code needs to have "require 'server.php'" without
-       double quotes.  So, you might have something like what's shown
-       below in each file:
-
-require 'server.php';
-require 'print-table.php'
-
-Using printTable as an example:
-
-Note: PHP uses '$' to declare variables
-
-$result = executePlainSQL("SELECT CUST_ID, NAME, PHONE_NUM FROM CUSTOMERS");
-
-$columnNames = array("Customer ID", "Name", "Phone Number");
-printTable($result, $columnNames); // this will print the table
-                                   // in the current webpage
-
-*/
-
 function printTable($resultFromSQL, $namesOfColumnsArray)
 {
     echo "<br>Here is the output, nicely formatted:<br>";
@@ -310,94 +215,65 @@ function printTable($resultFromSQL, $namesOfColumnsArray)
 
 // Connect Oracle...
 if ($db_conn) {
-
-    if (array_key_exists('reset', $_POST)) {
-        // Drop old table...
-        echo "<br> dropping table <br>";
-        executePlainSQL("Drop table Offer");
-
-        echo "<br> dropping table <br>";
-        executePlainSQL("Drop table HM");
-
-        // Create new table...
-        echo "<br> creating new table <br>";
-        executePlainSQL("create table HM (HMid number,
-                                                 HMname varchar2(30),
-                                                 department varchar2(30), 
-                                   1              primary key (HMid))");
+    if (array_key_exists('inserthr', $_POST)) {
+        // Get values from the user and insert data into
+        // the table.
+        $tuple = array(
+            ":bind1" => $_POST['hrid'],
+            ":bind2" => $_POST['hrname'],
+            ":bind3" => $_POST['department'],
+        );
+        $alltuples = array(
+            $tuple
+        );
+        executeBoundSQL("insert into HM values (:bind1, :bind2, :bind3)", $alltuples);
         OCICommit($db_conn);
-
-        echo "<br> creating new table <br>";
-        executePlainSQL("create table Offer (HRid number, 
-                                                    HMid number,
-                                                    Aid number,
-                                                    Oid number,
-                                                    Jobdetails varchar2(80), 
-                                                    primary key (HRid, Oid),
-                                                    foreign key (HRid) references HR on delete cascade)");
-        OCICommit($db_conn);
-
-
 
     } else
-        if (array_key_exists('inserthm', $_POST)) {
-            // Get values from the user and insert data into
-            // the table.
+        if (array_key_exists('updatesubmit', $_POST)) {
+            // Update tuple using data from user
             $tuple = array(
-                ":bind1" => $_POST['hmid'],
-                ":bind2" => $_POST['hmname'],
-                ":bind3" => $_POST['department'],
+                ":bind1" => $_POST['HRid'],
+                ":bind2" => $_POST['oid'],
+                ":bind3" => $_POST['newjobdetails'],
             );
             $alltuples = array(
                 $tuple
             );
-            executeBoundSQL("insert into HM values (:bind1, :bind2, :bind3)", $alltuples);
+            executeBoundSQL("update Offer set Jobdetails=:bind3, HRid=:bind1 where Oid=:bind2", $alltuples);
+
             OCICommit($db_conn);
 
         } else
-            if (array_key_exists('updatesubmit', $_POST)) {
+            if (array_key_exists('deleteOffer', $_POST)) {
                 // Update tuple using data from user
                 $tuple = array(
-                    ":bind1" => $_POST['oid'],
-                    ":bind2" => $_POST['newjobdetails'],
+                    ":bind1" => $_POST['Oid'],
                 );
                 $alltuples = array(
                     $tuple
                 );
-                executeBoundSQL("update Offer set Jobdetails=:bind2 where Oid=:bind1", $alltuples);
+                executeBoundSQL("delete from Offer where Oid=:bind1", $alltuples);
 
                 OCICommit($db_conn);
-
             } else
-                if (array_key_exists('deleteOffer', $_POST)) {
-                    // Update tuple using data from user
+                if (array_key_exists('insertoffer', $_POST)) {
+                    // Get values from the user and insert data into
+                    // the table.
                     $tuple = array(
-                        ":bind1" => $_POST['Oid'],
+                        ":bind1" => $_POST['ohrid'],
+                        ":bind2" => $_POST['hmid'],
+                        ":bind3" => $_POST['oaid'],
+                        ":bind4" => $_POST['oid'],
+                        ":bind5" => $_POST['jobdetails'],
                     );
                     $alltuples = array(
                         $tuple
                     );
-                    executeBoundSQL("delete from Offer where Oid=:bind1", $alltuples);
-
+                    executeBoundSQL("insert into Offer values (:bind1, :bind2, :bind3, :bind4, :bind5)", $alltuples);
                     OCICommit($db_conn);
-                } else
-                    if (array_key_exists('insertoffer', $_POST)) {
-                        // Get values from the user and insert data into
-                        // the table.
-                        $tuple = array(
-                            ":bind1" => $_POST['ohrid'],
-                            ":bind2" => $_POST['hmid'],
-                            ":bind3" => $_POST['oaid'],
-                            ":bind4" => $_POST['oid'],
-                            ":bind5" => $_POST['jobdetails'],
-                        );
-                        $alltuples = array(
-                            $tuple
-                        );
-                        executeBoundSQL("insert into Offer values (:bind1, :bind2, :bind3, :bind4, :bind5)", $alltuples);
-                        OCICommit($db_conn);
 
-                    }
+                }
 
 
     if ($_POST && $success) {
@@ -408,7 +284,7 @@ if ($db_conn) {
         $result = executePlainSQL("select * from HM");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
-        $columnNames = array("HR ID#", "HR Name", "Department");
+        $columnNames = array("HM ID#", "HM Name", "Department");
         printTable($result, $columnNames);
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
@@ -423,37 +299,4 @@ if ($db_conn) {
     $e = OCI_Error(); // For OCILogon errors pass no handle
     echo htmlentities($e['message']);
 }
-
-/* OCILogon() allows you to log onto the Oracle database
-     The three arguments are the username, password, and database.
-     You will need to replace "username" and "password" for this to
-     to work.
-     all strings that start with "$" are variables; they are created
-     implicitly by appearing on the left hand side of an assignment
-     statement */
-/* OCIParse() Prepares Oracle statement for execution
-      The two arguments are the connection and SQL query. */
-/* OCIExecute() executes a previously parsed statement
-      The two arguments are the statement which is a valid OCI
-      statement identifier, and the mode.
-      default mode is OCI_COMMIT_ON_SUCCESS. Statement is
-      automatically committed after OCIExecute() call when using this
-      mode.
-      Here we use OCI_DEFAULT. Statement is not committed
-      automatically when using this mode. */
-/* OCI_Fetch_Array() Returns the next row from the result data as an
-     associative or numeric array, or both.
-     The two arguments are a valid OCI statement identifier, and an
-     optinal second parameter which can be any combination of the
-     following constants:
-
-     OCI_BOTH - return an array with both associative and numeric
-     indices (the same as OCI_ASSOC + OCI_NUM). This is the default
-     behavior.
-     OCI_ASSOC - return an associative array (as OCI_Fetch_Assoc()
-     works).
-     OCI_NUM - return a numeric array, (as OCI_Fetch_Row() works).
-     OCI_RETURN_NULLS - create empty elements for the NULL fields.
-     OCI_RETURN_LOBS - return the value of a LOB of the descriptor.
-     Default mode is OCI_BOTH.  */
 ?>
