@@ -135,6 +135,10 @@ if ($db_conn) {
 
     if (array_key_exists('reset', $_POST)) {
         // Drop old table...
+
+        echo "<a href=\"https://www.students.cs.ubc.ca/~darvey6/index.html\"> Return to Home </a>";
+
+        echo "<br><br>";
         echo "<br> dropping table <br>";
         executePlainSQL("Drop table Screentest");
 

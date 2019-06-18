@@ -181,7 +181,7 @@ function printResult($result)
 
 function printTable($resultFromSQL, $namesOfColumnsArray)
 {
-    echo "<br>Here is the output, nicely formatted:<br>";
+
     echo "<table>";
     echo "<tr>";
     // iterate through the array and print the string contents
@@ -278,22 +278,22 @@ if ($db_conn) {
         $columnNames = array("Applicant ID", "Name", "Phone Number", "Address");
         printTable($result, $columnNames);
 
-        echo "<br>Application:<br>";
+        echo "<h5>Application:<br>";
         $result = executePlainSQL("select * from Apply");
         $columnNames = array("Applicant ID", "Job ID");
         printTable($result, $columnNames);
 
-        echo "<br>Screen tests:<br>";
+        echo "<h5>Screen tests:<br>";
         $result = executePlainSQL("select * from Screentest");
         $columnNames = array("Screen test ID", "Applicant ID");
         printTable($result, $columnNames);
 
-        echo "<br>Offers:<br>";
+        echo "<h5>Offers:<br>";
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
         printTable($result, $columnNames);
 
-        echo "<br>Interviews:<br>";
+        echo "<h5>Interviews:<br>";
         $result = executePlainSQL("select * from Interview");
         $columnNames = array("HM ID", "Applicant ID", "Time", "Location");
         printTable($result, $columnNames);

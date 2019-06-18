@@ -228,7 +228,6 @@ function printResult($result) { //prints results from a select statement
 
 function printTable($resultFromSQL, $namesOfColumnsArray)
 {
-    echo "<br>Here is the output, nicely formatted:<br>";
     echo "<table>";
     echo "<tr>";
     // iterate through the array and print the string contents
@@ -403,28 +402,28 @@ if ($db_conn) {
            $columnNames = array("Recruiter ID", "Name");
            printTable($result, $columnNames);
 
-        echo "<br>Jobs (part-time and full-time):<br>";
+        echo "<h5>Jobs (part-time and full-time):<br>";
         $result = executePlainSQL("select * from Job");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
         $columnNames = array("Job ID", "Title", "Description", "Deadline");
         printTable($result, $columnNames);
 
-        echo "<br>Full-time jobs:<br>";
+        echo "<h5>Full-time jobs:<br>";
         $result = executePlainSQL("select * from Job_Fulltime");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
         $columnNames = array("Job ID", "Benefits");
         printTable($result, $columnNames);
 
-        echo "<br>Part-time jobs:<br>";
+        echo "<h5>Part-time jobs:<br>";
         $result = executePlainSQL("select * from Job_Parttime");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
         $columnNames = array("Job ID", "Hours");
         printTable($result, $columnNames);
 
-        echo "<br>Screening tests:<br>";
+        echo "<h5>Screening tests:<br>";
         $result = executePlainSQL("select * from Screentest");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
