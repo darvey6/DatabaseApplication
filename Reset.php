@@ -135,16 +135,21 @@ if ($db_conn) {
 
     if (array_key_exists('reset', $_POST)) {
         // Drop old table...
-        echo "<p> Database has been reset</p>";
 
         echo "<br> dropping table <br>";
         executePlainSQL("Drop table Offer");
+
+        echo "<br> dropping table <br>";
+        executePlainSQL("Drop table Interview");
 
         echo "<br> dropping table <br>";
         executePlainSQL("Drop table HR");
 
         echo "<br> dropping table <br>";
         executePlainSQL("Drop table HM");
+
+
+
 
         // Create new table...
         echo "<br> creating new table <br>";
@@ -167,10 +172,23 @@ if ($db_conn) {
                                                     Aid number,
                                                     Oid number,
                                                     Jobdetails varchar2(80), 
-                                                    primary key (HRid, Oid),
-                                                    foreign key (HRid) references HR on delete cascade)");
+                                                    primary key (Oid, Aid),
+                                                    foreign key (HRid) references HR on delete set null ,
+                                                    foreign key (HMid) references HM on delete set null)");
         OCICommit($db_conn);
 
+        echo "<br> creating new table <br>";
+        executePlainSQL("create table Interview (HMid number,
+                                                        Aid number,
+                                                        time number, 
+                                                        location varchar2(80), 
+                                                        primary key (HMid, Aid ,time),
+                                                        foreign key (HMid) references HM on delete cascade)");
+        OCICommit($db_conn);
+
+        
+
+        echo "<p> Database has been reset</p>";
     }
 
 

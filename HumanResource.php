@@ -63,7 +63,7 @@
 <form method="POST" action="HumanResource.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="Oid" size="18">
+    <p><input type="text" name="Oid" size="12">
         <!-- Define two variables to pass values. -->
 
         <input type="submit" value="delete" name="deleteOffer"></p>

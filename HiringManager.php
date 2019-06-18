@@ -52,7 +52,7 @@
     <p>
         <input type="text" name="HRid" size="12">
         <input type="text" name="oid" size="12">
-        <input type="text" name="newjobdetails" size="72">
+        <input type="text" name="newjobdetails" size="60">
         <input type="submit" value="update" name="updatesubmit">
     </p>
 </form>
@@ -65,11 +65,27 @@
 <form method="POST" action="HiringManager.php">
     <!-- refreshes page when submitted -->
 
-    <p><input type="text" name="Oid" size="18">
+    <p><input type="text" name="Oid" size="12">
         <!-- Define two variables to pass values. -->
 
         <input type="submit" value="delete" name="deleteOffer"></p>
-    </p>
+</form>
+
+<h4> Schedule interview time: </h4>
+<p>
+    Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Location
+</p>
+<form method="POST" action="HiringManager.php">
+    <!-- refreshes page when submitted -->
+
+    <p> <input type="text" name="HMid" size="12">
+        <input type="text" name="Aid" size="12">
+        <input type="text" name="time" size="12">
+        <input type="text" name="location" size="60">
+        <!-- Define two variables to pass values. -->
+
+        <input type="submit" value="schedule" name="scheduleInterview"></p>
 </form>
 
 
@@ -273,7 +289,22 @@ if ($db_conn) {
                     executeBoundSQL("insert into Offer values (:bind1, :bind2, :bind3, :bind4, :bind5)", $alltuples);
                     OCICommit($db_conn);
 
-                }
+                } else
+                    if (array_key_exists('scheduleInterview', $_POST)) {
+                        // Get values from the user and insert data into
+                        // the table.
+                        $tuple = array(
+                            ":bind1" => $_POST['HMid'],
+                            ":bind2" => $_POST['Aid'],
+                            ":bind3" => $_POST['time'],
+                            ":bind4" => $_POST['location'],
+                        );
+                        $alltuples = array(
+                            $tuple
+                        );
+                        executeBoundSQL("insert into Interview values (:bind1, :bind2, :bind3, :bind4)", $alltuples);
+                        OCICommit($db_conn);
+                    }
 
 
     if ($_POST && $success) {
@@ -288,6 +319,9 @@ if ($db_conn) {
         printTable($result, $columnNames);
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
+        printTable($result, $columnNames);
+        $result = executePlainSQL("select * from Interview");
+        $columnNames = array("HM ID", "Applicant ID", "Time", "Location");
         printTable($result, $columnNames);
     }
 
