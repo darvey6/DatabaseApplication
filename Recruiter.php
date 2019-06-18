@@ -1,27 +1,3 @@
-<!--Oracle/PHP test file for UBC CPSC 304.
-  Created by Jiemin Zhang, 2011.
-  Modified by Simona Radu, Raghav Thakur, Ed Knorr, and others.
-
-  This file shows the very basics of how to execute PHP commands
-  on Oracle.
-
-  Specifically, it will drop a table, create a table, insert values,
-  update values, and perform select queries.
-
-  NOTE:  If you have a table called "tab1", it will be destroyed
-         by this sample program.
-
-  The script assumes you already have a server set up.
-  All OCI commands are commands to the Oracle libraries.
-  To get the file to work, you must place it somewhere where your
-  Apache server can run it, and you must rename it to have a ".php"
-  extension.  You must also change the username and password on the
-  OCILogon below to be your own ORACLE username and password.
-
-  Next, we have some sample HTML code that will appear when you run
-  this script.
- -->
-
 <p>If you wish to reset the table, press the reset button.
    If this is the first time that you're running this page,
    you MUST use reset.</p>
@@ -30,54 +6,102 @@
    <p><input type="submit" value="Reset" name="reset"></p>
 </form>
 
-<p>Insert values into tab1 below:</p>
+<p>Insert or update recruiter:</p>
 <p><font size="2">
-Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Rid &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-LastName</font></p>
+</font></p>
 <form method="POST" action="Recruiter.php">
 <!-- refreshes page when submitted -->
 
-   <p><input type="text" name="insNo" size="6">
-      <input type="text" name="insName"size="18">
-      <input type="text" name="insLastName" size="18">
+   <p><input type="text" name="rid" size="6">
+      <input type="text" name="rname"size="18">
 <!-- Define two variables to pass values. -->
-      <input type="submit" value="insert" name="insertsubmit"></p>
+      <input type="submit" value="insert" name="insertrecruiter"></p>
 </form>
 
 <!-- Create a form to pass the values.
      See below for how to get the values. -->
 
-<p> Update the name by inserting the old and new values below: </p>
+<p> Add or update a full-time job posting: </p>
 <p><font size="2">
-Old Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-New Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Old LastName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-New LastName</font></p>
-<form method="POST" action="Recruiter.php">
-<!-- refreshes page when submitted -->
-
-   <p><input type="text" name="oldName" size="18">
-     <input type="text" name="newName"size="18">
-     <input type="text" name="oldLastName" size="18">
-       <input type="text" name="newLastName"size="18">
-<!-- Define two variables to pass values. -->
-
-<input type="submit" value="update" name="updatesubmit"></p>
-<input type="submit" value="run hardcoded queries" name="dostuff"></p>
-</form>
-
-<p> Delete the name to delete tuple: </p>
-<p><font size="2">
-Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Jid &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Description &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Benefits &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Deadline
 </font></p>
 <form method="POST" action="Recruiter.php">
 <!-- refreshes page when submitted -->
 
-   <p><input type="text" name="deleteName" size="18">
+   <p><input type="text" name="ftid" size="6">
+     <input type="text" name="fttitle"size="20">
+       <input type="text" name="ftdescription"size="30">
+       <input type="text" name="ftbenefits"size="18">
+       <input type="text" name="ftdeadline"size="18">
 <!-- Define two variables to pass values. -->
 
-      <input type="submit" value="delete" name="deletesubmit"></p>
+    <input type="submit" value="Post" name="postft">
+    <input type="submit" value="Update" name="updateft"></p>
+
+    <input type="submit" value="run hardcoded queries" name="dostuff"></p>
+</form>
+
+<p> Add or update a part-time job posting: </p>
+<p><font size="2">
+        Jid &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Description &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Deadline
+    </font></p>
+<form method="POST" action="Recruiter.php">
+    <!-- refreshes page when submitted -->
+
+    <p><input type="text" name="ptid" size="6">
+        <input type="text" name="pttitle"size="20">
+        <input type="text" name="ptdescription"size="30">
+        <input type="text" name="pthours"size="18">
+        <input type="text" name="ptdeadline"size="18">
+
+        <!-- Define two variables to pass values. -->
+
+        <input type="submit" value="Post" name="postpt">
+        <input type="submit" value="Update" name="updatept"></p>
+
+    <input type="submit" value="run hardcoded queries" name="dostuff"></p>
+</form>
+
+
+<p>Send a screening test:</p>
+<p><font size="2">
+        Test ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Aid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </font></p>
+<form method="POST" action="Recruiter.php">
+    <!-- refreshes page when submitted -->
+
+    <p><input type="text" name="sid" size="10">
+        <input type="text" name="said"size="10">
+        <!-- Define two variables to pass values. -->
+        <input type="submit" value="insert" name="sendtest"></p>
+</form>
+
+
+<p> To delete recruiter, job posting, or screen test: </p>
+<p><font size="2">
+ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></p>
+<form method="POST" action="Recruiter.php">
+<!-- refreshes page when submitted -->
+
+   <p><input type="text" name="deleteid" size="18">
+<!-- Define two variables to pass values. -->
+
+      <input type="submit" value="delete recruiter" name="deleterecruiter">
+       <input type="submit" value="delete job" name="deletejob"></p>
+    <input type="submit" value="delete test" name="deletetest"></p>
+
     </p>
 </form>
 
@@ -109,14 +133,11 @@ Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </html>
 
 
-
 <?php
 
 /* This tells the system that it's no longer just parsing
    HTML; it's now parsing PHP. */
 
-// keep track of errors so it redirects the page only if
-// there are no errors
 $success = True;
 $db_conn = OCILogon("ora_darvey6", "a16444144",
                     "dbhost.students.cs.ubc.ca:1522/stu");
@@ -148,7 +169,6 @@ function executePlainSQL($cmdstr) {
 
 	}
 	return $statement;
-
 }
 
 function executeBoundSQL($cmdstr, $list) {
@@ -206,58 +226,6 @@ function printResult($result) { //prints results from a select statement
 	echo "</table>";
 }
 
-
-/*
-Function printTable created by Raghav Thakur on 2018-11-15.
-
-Input:  takes in a result returned from your SQL query and an array of
-        strings of the column names
-Output: prints an HTML table of the results returned from your SQL query.
-
-printTable is an easy way to iteratively print the columns of a table,
-instead of having to manually print out each column which can be
-cumbersome and lead to duplicate code all over the place.
-
-If you will be making calls to printTable multiple times and intend to
-use it for multiple php files, please do the following:
-
-Step 1) Create a new php file and copy the printTable function and the
-        associated HTML styling code into the file you created, give
-        this file a meaningful name such as 'print-table.php'.
-        (Search for "style" above.)
-
-Step 2) In whichever file you want to use the printTable function,
-        assuming this file also contains the server code to communicate
-        with the database:  Type in "include 'print-table.php'" without
-        double quotes.  If the file in which you want to use printTable
-        is not in the root directory, you'll need to specify the path of
-        root directory where 'print-table.php' is.  As an example:
-        "include '../print-table.php'" without double quotes.
-
-Step 3) You can now make calls to the printTable function without
-        needing to redeclare it in your current file.
-
-Note:  You can move all the server code into a separate file called
-       'server.php' in a similar way, except whichever file needs to
-       use the server code needs to have "require 'server.php'" without
-       double quotes.  So, you might have something like what's shown
-       below in each file:
-
-require 'server.php';
-require 'print-table.php'
-
-Using printTable as an example:
-
-Note: PHP uses '$' to declare variables
-
-$result = executePlainSQL("SELECT CUST_ID, NAME, PHONE_NUM FROM CUSTOMERS");
-
-$columnNames = array("Customer ID", "Name", "Phone Number");
-printTable($result, $columnNames); // this will print the table
-                                   // in the current webpage
-
-*/
-
 function printTable($resultFromSQL, $namesOfColumnsArray)
 {
     echo "<br>Here is the output, nicely formatted:<br>";
@@ -284,103 +252,184 @@ function printTable($resultFromSQL, $namesOfColumnsArray)
     echo "</table>";
 }
 
-
-
-
 // Connect Oracle...
 if ($db_conn) {
+    if (array_key_exists('insertrecruiter', $_POST)) {
+        // Get values from the user and insert data into
+            // the table.
+        $tuple = array (
+            ":bind1" => $_POST['rid'],
+            ":bind2" => $_POST['rname'],
+        );
+        $alltuples = array (
+            $tuple
+        );
+        executeBoundSQL("insert into Recruiter values (:bind1, :bind2)", $alltuples);
+        OCICommit($db_conn);
+    } else
+        if (array_key_exists('postft', $_POST)) {
+            // Update tuple using data from user
+            $tuple = array (
+                ":bind1" => $_POST['ftid'],
+                ":bind2" => $_POST['fttitle'],
+                ":bind3" => $_POST['ftdescription'],
+                ":bind4" => $_POST['ftbenefits'],
+                ":bind5" => $_POST['ftdeadline'],
+            );
+            $alltuples = array (
+                $tuple
+            );
+            executeBoundSQL("insert into Job values (:bind1, :bind2, :bind3, :bind5)", $alltuples);
+            executeBoundSQL("insert into Job_Fulltime values (:bind1, :bind4)", $alltuples);
 
-	if (array_key_exists('reset', $_POST)) {
-		// Drop old table...
-		echo "<br> dropping table <br>";
-		executePlainSQL("Drop table tab1");
+            OCICommit($db_conn);
+    } else
+        if (array_key_exists('postpt', $_POST)) {
+            // Update tuple using data from user
+            $tuple = array (
+                ":bind1" => $_POST['ptid'],
+                ":bind2" => $_POST['pttitle'],
+                ":bind3" => $_POST['ptdescription'],
+                ":bind4" => $_POST['pthours'],
+                ":bind5" => $_POST['ptdeadline'],
+            );
+            $alltuples = array (
+                $tuple
+            );
+            executeBoundSQL("insert into Job values (:bind1, :bind2, :bind3, :bind5)", $alltuples);
+            executeBoundSQL("insert into Job_Parttime values (:bind1, :bind4)", $alltuples);
 
-		// Create new table...
-		echo "<br> creating new table <br>";
-		executePlainSQL("create table tab1 (nid number, name varchar2(30), lastname varchar2(30), primary key (nid))");
-		OCICommit($db_conn);
+            OCICommit($db_conn);
 
-	} else
-		if (array_key_exists('insertsubmit', $_POST)) {
-			// Get values from the user and insert data into
-                // the table.
-			$tuple = array (
-				":bind1" => $_POST['insNo'],
-				":bind2" => $_POST['insName'],
-        ":bind3" => $_POST['insLastName']
-			);
-			$alltuples = array (
-				$tuple
-			);
-			executeBoundSQL("insert into tab1 values (:bind1, :bind2, :bind3)", $alltuples);
-			OCICommit($db_conn);
 
-		} else
-			if (array_key_exists('updatesubmit', $_POST)) {
-				// Update tuple using data from user
-				$tuple = array (
-					":bind1" => $_POST['oldName'],
-					":bind2" => $_POST['newName'],
-          ":bind3" => $_POST['oldLastName'],
-          ":bind4" => $_POST['newLastName'],
-				);
-				$alltuples = array (
-					$tuple
-				);
-				executeBoundSQL("update tab1 set name=:bind2 where name=:bind1", $alltuples);
-        executeBoundSQL("update tab1 set lastname=:bind4 where lastname=:bind3", $alltuples);
+    } else
+    if (array_key_exists('updateft', $_POST)) {
+        // Update tuple using data from user
+        $tuple = array (
+            ":bind1" => $_POST['ftid'],
+            ":bind2" => $_POST['fttitle'],
+            ":bind3" => $_POST['ftdescription'],
+            ":bind4" => $_POST['ftbenefits'],
+            ":bind5" => $_POST['ftdeadline'],
+        );
+        $alltuples = array (
+            $tuple
+        );
+        executeBoundSQL("update Job set Title=:bind2, 
+                                                Description=:bind3, 
+                                                Deadline=:bind4,   
+                                            where Jid=:bind1", $alltuples);
+        OCICommit($db_conn);
 
-				OCICommit($db_conn);
+        executeBoundSQL("update Job_Fulltime set Benefits=:bind4   
+                                            where Jid=:bind1", $alltuples);
+        OCICommit($db_conn);
 
-			} else
-  			if (array_key_exists('deletesubmit', $_POST)) {
-  				// Update tuple using data from user
-  				$tuple = array (
-  					":bind1" => $_POST['deleteName'],
-  				);
-  				$alltuples = array (
-  					$tuple
-  				);
-  				executeBoundSQL("delete from tab1 where name=:bind1", $alltuples);
 
-  				OCICommit($db_conn);
-        } else
-				if (array_key_exists('dostuff', $_POST)) {
-					// Insert data into table...
-					executePlainSQL("insert into tab1 values (10, 'Frank', 'Smith')");
-					// Insert data into table using bound variables
-					$list1 = array (
-						":bind1" => 6,
-						":bind2" => "All",
-            ":bind3" => "Howe"
-					);
-					$list2 = array (
-						":bind1" => 7,
-						":bind2" => "John",
-            ":bind3" => "Snow"
-					);
-					$allrows = array (
-						$list1,
-						$list2
-					);
-					executeBoundSQL("insert into tab1 values (:bind1, :bind2, :bind3)", $allrows); //the function takes a list of lists
-		// Update data...
-		//executePlainSQL("update tab1 set nid=10 where nid=2");
-		// Delete data...
-		//executePlainSQL("delete from tab1 where nid=1");
-		OCICommit($db_conn);
-		}
+    } else
+        if (array_key_exists('updatept', $_POST)) {
+            // Update tuple using data from user
+            $tuple = array (
+                ":bind1" => $_POST['ptid'],
+                ":bind2" => $_POST['pttitle'],
+                ":bind3" => $_POST['ptdescription'],
+                ":bind4" => $_POST['pthours'],
+                ":bind5" => $_POST['ptdeadline'],
+            );
+            $alltuples = array (
+                $tuple
+            );
+            executeBoundSQL("update Job set Title=:bind2, 
+                                                Description=:bind3, 
+                                                Deadline=:bind4  
+                                            where Jid=:bind1", $alltuples);
+            OCICommit($db_conn);
+
+            executeBoundSQL("update Job_Fulltime set Hours=:bind4   
+                                                where Jid=:bind1", $alltuples);
+            OCICommit($db_conn);
+
+    } else
+    if (array_key_exists('deleterecruiter', $_POST)) {
+        // Update tuple using data from user
+        $tuple = array (
+            ":bind1" => $_POST['deleteid'],
+        );
+        $alltuples = array (
+            $tuple
+        );
+        executeBoundSQL("delete from Recruiter where Rid=:bind1", $alltuples);
+
+        OCICommit($db_conn);
+    } else
+        if (array_key_exists('deletejob', $_POST)) {
+            // Update tuple using data from user
+            $tuple = array (
+                ":bind1" => $_POST['deleteid'],
+            );
+            $alltuples = array (
+                $tuple
+            );
+            executeBoundSQL("delete from Job where Jid=:bind1", $alltuples);
+
+            OCICommit($db_conn);
+
+    } else
+        if (array_key_exists('sendtest', $_POST)) {
+            // Update tuple using data from user
+            $tuple = array (
+                ":bind1" => $_POST['sid'],
+                ":bind2" => $_POST['said'],
+
+            );
+            $alltuples = array (
+                $tuple
+            );
+            executeBoundSQL("insert into Screentest values (:bind1, :bind2)", $alltuples);
+
+            OCICommit($db_conn);
+    }
 
 	if ($_POST && $success) {
 		//POST-REDIRECT-GET -- See http://en.wikipedia.org/wiki/Post/Redirect/Get
 		header("location: Recruiter.php");
 	} else {
 		// Select data...
-		$result = executePlainSQL("select * from tab1");
+        echo "<br>Recruiters:<br>";
+
+        $result = executePlainSQL("select * from Recruiter");
 		/*printResult($result);*/
            /* next two lines from Raghav replace previous line */
-           $columnNames = array("Customer ID#", "First Name", "Last Name");
+           $columnNames = array("Recruiter ID", "Name");
            printTable($result, $columnNames);
+
+        echo "<br>Jobs (part-time and full-time):<br>";
+        $result = executePlainSQL("select * from Job");
+        /*printResult($result);*/
+        /* next two lines from Raghav replace previous line */
+        $columnNames = array("Job ID", "Title", "Description", "Deadline");
+        printTable($result, $columnNames);
+
+        echo "<br>Full-time jobs:<br>";
+        $result = executePlainSQL("select * from Job_Fulltime");
+        /*printResult($result);*/
+        /* next two lines from Raghav replace previous line */
+        $columnNames = array("Job ID", "Benefits");
+        printTable($result, $columnNames);
+
+        echo "<br>Part-time jobs:<br>";
+        $result = executePlainSQL("select * from Job_Parttime");
+        /*printResult($result);*/
+        /* next two lines from Raghav replace previous line */
+        $columnNames = array("Job ID", "Hours");
+        printTable($result, $columnNames);
+
+        echo "<br>Screening tests:<br>";
+        $result = executePlainSQL("select * from Screentest");
+        /*printResult($result);*/
+        /* next two lines from Raghav replace previous line */
+        $columnNames = array("Test ID", "Applicant");
+        printTable($result, $columnNames);
 	}
 
 	//Commit to save changes...
@@ -391,36 +440,4 @@ if ($db_conn) {
 	echo htmlentities($e['message']);
 }
 
-/* OCILogon() allows you to log onto the Oracle database
-     The three arguments are the username, password, and database.
-     You will need to replace "username" and "password" for this to
-     to work.
-     all strings that start with "$" are variables; they are created
-     implicitly by appearing on the left hand side of an assignment
-     statement */
-/* OCIParse() Prepares Oracle statement for execution
-      The two arguments are the connection and SQL query. */
-/* OCIExecute() executes a previously parsed statement
-      The two arguments are the statement which is a valid OCI
-      statement identifier, and the mode.
-      default mode is OCI_COMMIT_ON_SUCCESS. Statement is
-      automatically committed after OCIExecute() call when using this
-      mode.
-      Here we use OCI_DEFAULT. Statement is not committed
-      automatically when using this mode. */
-/* OCI_Fetch_Array() Returns the next row from the result data as an
-     associative or numeric array, or both.
-     The two arguments are a valid OCI statement identifier, and an
-     optinal second parameter which can be any combination of the
-     following constants:
-
-     OCI_BOTH - return an array with both associative and numeric
-     indices (the same as OCI_ASSOC + OCI_NUM). This is the default
-     behavior.
-     OCI_ASSOC - return an associative array (as OCI_Fetch_Assoc()
-     works).
-     OCI_NUM - return a numeric array, (as OCI_Fetch_Row() works).
-     OCI_RETURN_NULLS - create empty elements for the NULL fields.
-     OCI_RETURN_LOBS - return the value of a LOB of the descriptor.
-     Default mode is OCI_BOTH.  */
 ?>

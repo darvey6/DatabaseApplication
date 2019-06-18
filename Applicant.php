@@ -292,6 +292,11 @@ if ($db_conn) {
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
         printTable($result, $columnNames);
+
+        echo "<br>Interviews:<br>";
+        $result = executePlainSQL("select * from Interview");
+        $columnNames = array("HM ID", "Applicant ID", "Time", "Location");
+        printTable($result, $columnNames);
     }
 
     //Commit to save changes...
