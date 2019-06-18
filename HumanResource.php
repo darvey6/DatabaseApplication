@@ -278,11 +278,15 @@ if ($db_conn) {
         header("location: HumanResource.php");
     } else {
         // Select data...
+
+        echo "<br>Human Resource:<br>";
         $result = executePlainSQL("select * from HR");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
         $columnNames = array("HR ID#", "HR Name");
         printTable($result, $columnNames);
+
+        echo "<br>Offers:<br>";
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
         printTable($result, $columnNames);

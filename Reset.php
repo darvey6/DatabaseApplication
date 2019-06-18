@@ -135,6 +135,23 @@ if ($db_conn) {
 
     if (array_key_exists('reset', $_POST)) {
         // Drop old table...
+        echo "<br> dropping table <br>";
+        executePlainSQL("Drop table Screentest");
+
+        echo "<br> dropping table <br>";
+        executePlainSQL("drop table Recruiter");
+
+        echo "<br> dropping table <br>";
+        executePlainSQL("drop table Job_Parttime");
+
+        echo "<br> dropping table <br>";
+        executePlainSQL("drop table Job_Fulltime");
+
+        echo "<br> dropping table <br>";
+        executePlainSQL("Drop table Apply");
+
+        echo "<br> dropping table <br>";
+        executePlainSQL("drop table Job");
 
         echo "<br> dropping table <br>";
         executePlainSQL("Drop table Offer");
@@ -148,36 +165,94 @@ if ($db_conn) {
         echo "<br> dropping table <br>";
         executePlainSQL("Drop table HM");
 
+        echo "<br> dropping table <br>";
+        executePlainSQL("Drop table Applicant");
+
+        // divider //
 
 
+        echo "<br> creating recruiter <br>";
+        executePlainSQL("create table Recruiter (Rid number, 
+                                                        Name varchar2(30) not null,
+                                                        primary key(Rid))");
+        OCICommit($db_conn);
 
-        // Create new table...
-        echo "<br> creating new table <br>";
+        echo "<br> creating applicant <br>";
+        executePlainSQL("create table Applicant (Aid integer primary key,
+                                                            Name char(30) NOT NULL,
+                                                            Phone char(10) UNIQUE,
+                                                            Address char(60))");
+        OCICommit($db_conn);
+
+        echo "<br> creating job <br>";
+        executePlainSQL("create table Job(Jid integer primary key, 
+                                                    Title varchar2(20), 
+                                                    Description varchar2(30), 
+                                                    Deadline date)");
+        OCICommit($db_conn);
+
+        echo "<br> creating part-time job <br>";
+        executePlainSQL("create table Job_Parttime (Jid integer, 
+                                                            Hours integer, 
+                                                            PRIMARY KEY (Jid),
+                                                            FOREIGN KEY (Jid) references Job (Jid) 
+                                                                                ON DELETE CASCADE)");
+        OCICommit($db_conn);
+
+        echo "<br> creating full-time job <br>";
+        executePlainSQL("create table Job_Fulltime (Jid integer primary key, 
+                                                            Benefits char(30),
+                                                            FOREIGN KEY (Jid) references Job (Jid) 
+                                                                                ON DELETE CASCADE)");
+        OCICommit($db_conn);
+
+        echo "<br> creating application <br>";
+        executePlainSQL("create table Apply (Aid integer, 
+                                                    Jid integer,
+                                                    primary key (Aid, Jid),
+                                                    FOREIGN KEY (Jid) references Job (Jid) 
+                                                                        ON DELETE CASCADE,
+                                                    foreign key (Aid) references Applicant (Aid)
+                                                                        on delete cascade)");
+        OCICommit($db_conn);
+
+        echo "<br> creating screentest <br>";
+        executePlainSQL("create table Screentest (Sid integer, 
+                                                            Aid integer UNIQUE NOT NULL, 
+                                                            PRIMARY KEY (Sid),
+                                                            Foreign key (Aid) REFERENCES Applicant (Aid) ON DELETE CASCADE)
+                                                            ");
+        OCICommit($db_conn);
+
+        // divider
+
+        echo "<br> creating Human Resource <br>";
         executePlainSQL("create table HR (HRid number,
                                                  HRname varchar2(30), 
                                                  primary key (HRid))");
         OCICommit($db_conn);
 
         // Create new table...
-        echo "<br> creating new table <br>";
+        echo "<br> creating Hiring Manager <br>";
         executePlainSQL("create table HM (HMid number,
                                                  HMname varchar2(30),
                                                  department varchar2(30), 
                                                  primary key (HMid))");
         OCICommit($db_conn);
 
-        echo "<br> creating new table <br>";
+        echo "<br> creating Offer<br>";
         executePlainSQL("create table Offer (HRid number, 
                                                     HMid number,
                                                     Aid number,
                                                     Oid number,
                                                     Jobdetails varchar2(80), 
                                                     primary key (Oid, Aid),
-                                                    foreign key (HRid) references HR on delete set null ,
+                                                    foreign key (HRid) references HR on delete set null,
+                                                    foreign key (Aid) references Applicant on delete cascade,
                                                     foreign key (HMid) references HM on delete set null)");
         OCICommit($db_conn);
 
-        echo "<br> creating new table <br>";
+        echo "<br> creating Interview <br>";
         executePlainSQL("create table Interview (HMid number,
                                                         Aid number,
                                                         time number, 
@@ -186,7 +261,7 @@ if ($db_conn) {
                                                         foreign key (HMid) references HM on delete cascade)");
         OCICommit($db_conn);
 
-        
+
 
         echo "<p> Database has been reset</p>";
     }

@@ -73,6 +73,8 @@
 
 <h4> Schedule interview time: </h4>
 <p>
+    HR ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;
     Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Location
 </p>
@@ -312,14 +314,19 @@ if ($db_conn) {
         header("location: HiringManager.php");
     } else {
         // Select data...
+        echo "<br>Hiring Managers:<br>";
         $result = executePlainSQL("select * from HM");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
         $columnNames = array("HM ID#", "HM Name", "Department");
         printTable($result, $columnNames);
+
+        echo "<br>Offers:<br>";
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
         printTable($result, $columnNames);
+
+        echo "<br>Interviews:<br>";
         $result = executePlainSQL("select * from Interview");
         $columnNames = array("HM ID", "Applicant ID", "Time", "Location");
         printTable($result, $columnNames);
