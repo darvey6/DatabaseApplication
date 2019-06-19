@@ -21,7 +21,7 @@
     Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Benefits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Job Details
+    Deadline
 </p>
 <form method="POST" action="Recruiter.php">
 <!-- refreshes page when submitted -->
@@ -42,17 +42,17 @@
     Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Hours&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Job Details
+    Deadline
 </p>
 <form method="POST" action="Recruiter.php">
     <!-- refreshes page when submitted -->
 
     <p>
-        <input type="text" name="ftid" size="12">
-        <input type="text" name="fttitle" size="18">
-        <input type="text" name="ftdescription" size="30">
-        <input type="text" name="ftbenefits" size="18">
-        <input type="text" name="ftdeadline" size="18">
+        <input type="text" name="ptid" size="12">
+        <input type="text" name="pttitle" size="18">
+        <input type="text" name="ptdescription" size="30">
+        <input type="text" name="ptbenefits" size="18">
+        <input type="text" name="ptdeadline" size="18">
         <input type="submit" value="Post" name="postpt">
         <input type="submit" value="Update" name="updatept">
     </p>
