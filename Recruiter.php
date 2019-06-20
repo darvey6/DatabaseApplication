@@ -21,7 +21,6 @@
     Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Benefits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Job Details
 </p>
 <form method="POST" action="Recruiter.php">
 <!-- refreshes page when submitted -->
@@ -30,7 +29,6 @@
        <input type="text" name="fttitle" size="18">
        <input type="text" name="ftdescription" size="30">
        <input type="text" name="ftbenefits" size="18">
-       <input type="text" name="ftdeadline" size="18">
        <input type="submit" value="Post" name="postft">
        <input type="submit" value="Update" name="updateft">
    </p>
@@ -42,17 +40,15 @@
     Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Description&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Hours&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Job Details
 </p>
 <form method="POST" action="Recruiter.php">
     <!-- refreshes page when submitted -->
 
     <p>
-        <input type="text" name="ftid" size="12">
-        <input type="text" name="fttitle" size="18">
-        <input type="text" name="ftdescription" size="30">
-        <input type="text" name="ftbenefits" size="18">
-        <input type="text" name="ftdeadline" size="18">
+        <input type="text" name="ptid" size="12">
+        <input type="text" name="pttitle" size="18">
+        <input type="text" name="ptdescription" size="30">
+        <input type="text" name="pthours" size="18">
         <input type="submit" value="Post" name="postpt">
         <input type="submit" value="Update" name="updatept">
     </p>
@@ -110,13 +106,39 @@
     </p>
 </form>
 
+
+<h4> See how many interviews an applicant has: </h4>
 <p>
-    Job ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Applicant ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
+<form method="POST" action="Recruiter.php">
+    <!-- refreshes page when submitted -->
+
+    <p><input type="text" name="aa" size="12">
+        <!-- Define two variables to pass values. -->
+        <input type="submit" value="See" name="aaa"></p>
+
+    </p>
+</form>
+
 <form method="POST" action="Recruiter.php">
     <h4> See scheduled interview information: <input type="submit" value="See" name="seeinterview"> <h4>
 
 </form>
+
+
+<form method="POST" action="Recruiter.php">
+    <h4> See number of applications for each job: <input type="submit" value="See" name="seeapp"> </h4>
+    <!-- refreshes page when submitted -->
+    <!-- Define two variables to pass values. -->
+
+</form>
+
+<form method="POST" action="Recruiter.php">
+    <h4> See applicants who have applied to all jobs: <input type="submit" value="See" name="seeapplicant"></h4>
+
+</form>
+
 
 
 <html>
@@ -289,31 +311,29 @@ if ($db_conn) {
                 ":bind2" => $_POST['fttitle'],
                 ":bind3" => $_POST['ftdescription'],
                 ":bind4" => $_POST['ftbenefits'],
-                ":bind5" => $_POST['ftdeadline'],
             );
             $alltuples = array (
                 $tuple
             );
-            executeBoundSQL("insert into Job values (:bind1, :bind2, :bind3, :bind5)", $alltuples);
+            executeBoundSQL("insert into Job values (:bind1, :bind2, :bind3)", $alltuples);
             executeBoundSQL("insert into Job_Fulltime values (:bind1, :bind4)", $alltuples);
 
             OCICommit($db_conn);
     } else
         if (array_key_exists('postpt', $_POST)) {
             // Update tuple using data from user
+
             $tuple = array (
                 ":bind1" => $_POST['ptid'],
                 ":bind2" => $_POST['pttitle'],
                 ":bind3" => $_POST['ptdescription'],
                 ":bind4" => $_POST['pthours'],
-                ":bind5" => $_POST['ptdeadline'],
             );
             $alltuples = array (
                 $tuple
             );
-            executeBoundSQL("insert into Job values (:bind1, :bind2, :bind3, :bind5)", $alltuples);
+            executeBoundSQL("insert into Job values (:bind1, :bind2, :bind3)", $alltuples);
             executeBoundSQL("insert into Job_Parttime values (:bind1, :bind4)", $alltuples);
-
             OCICommit($db_conn);
 
 
@@ -325,14 +345,12 @@ if ($db_conn) {
             ":bind2" => $_POST['fttitle'],
             ":bind3" => $_POST['ftdescription'],
             ":bind4" => $_POST['ftbenefits'],
-            ":bind5" => $_POST['ftdeadline'],
         );
         $alltuples = array (
             $tuple
         );
         executeBoundSQL("update Job set Title=:bind2, 
-                                                Description=:bind3, 
-                                                Deadline=:bind4   
+                                                Description=:bind3 
                                             where Jid=:bind1", $alltuples);
         OCICommit($db_conn);
 
@@ -349,18 +367,16 @@ if ($db_conn) {
                 ":bind2" => $_POST['pttitle'],
                 ":bind3" => $_POST['ptdescription'],
                 ":bind4" => $_POST['pthours'],
-                ":bind5" => $_POST['ptdeadline'],
             );
             $alltuples = array (
                 $tuple
             );
             executeBoundSQL("update Job set Title=:bind2, 
-                                                Description=:bind3, 
-                                                Deadline=:bind4  
+                                                Description=:bind3 
                                             where Jid=:bind1", $alltuples);
             OCICommit($db_conn);
 
-            executeBoundSQL("update Job_Fulltime set Hours=:bind4   
+            executeBoundSQL("update Job_Parttime set Hours=:bind4   
                                                 where Jid=:bind1", $alltuples);
             OCICommit($db_conn);
 
@@ -480,9 +496,91 @@ if ($db_conn) {
                     $columnNames = array("Applicant ID", "Time", "Location", "Phone Number");
                     printTable($result, $columnNames);
 
-                }
 
-	if ($_POST && $success) {
+                } else
+                    if (array_key_exists('seeapp', $_POST)) {
+                        // Update tuple using data from user
+//                $tuple = array(
+//                    ":bind1" => $_POST['deleteaid'],
+//                );
+//                $alltuples = array(
+//                    $tuple
+//                );
+                        echo "<h5>Application count:<br>";
+                        $result = executePlainSQL("select Jid, count(*)
+                                                        from Apply
+                                                        group by Jid");
+//                $result = executePlainSQL("select * from Apply");
+
+                        $columnNames = array("Job ID", "Number of applications");
+                        printTable($result, $columnNames);
+
+                } else
+                    if (array_key_exists('seeapplicant', $_POST)) {
+                        echo "<h5>Applicants who have applied to every job:<br>";
+//                        $result = executePlainSQL("SELECT a.Aid
+//                                                            FROM Applicant a
+//                                                            WHERE NOT EXISTS
+//                                                            (SELECT * from Job j
+//                                                            WHERE NOT EXISTS
+//                                                            (SELECT ap.Aid, ap.Jid
+//                                                            FROM apply ap
+//                                                            WHERE ap.Aid=a.Aid AND
+//                                                            ap.Jid=j.Jid))");
+
+//                        $result = executePlainSQL("SELECT a.Aid
+//                                                                FROM Applicant a
+//                                                                WHERE not exists
+//                                                                ( SELECT j.Jid from Job j
+//                                                                where not exists
+//                                                                (select ap.Jid
+//                                                                from Apply ap))");
+
+                        $result = executePlainSQL("SELECT a.Aid
+                                                                FROM Apply a
+                                                                WHERE NOT EXISTS
+                                                                ((SELECT j.Jid from Job j)
+                                                                minus
+                                                                (select ap.Jid
+                                                                from Apply ap
+                                                                where ap.Aid = a.Aid))
+                                                                group by a.Aid");
+
+                        $columnNames = array("Applicants");
+                        printTable($result, $columnNames);
+
+                    } else
+                        if (array_key_exists('aaa', $_POST)) {
+//                            echo "<h5>Applicants who have applied to every job:<br>";
+//                        $result = executePlainSQL("SELECT a.Aid
+//                                                            FROM Applicant a
+//                                                            WHERE NOT EXISTS
+//                                                            (SELECT * from Job j
+//                                                            WHERE NOT EXISTS
+//                                                            (SELECT ap.Aid, ap.Jid
+//                                                            FROM apply ap
+//                                                            WHERE ap.Aid=a.Aid AND
+//                                                            ap.Jid=j.Jid))");
+                            $tuple = array(
+                            ":bind1" => $_POST['aa'],
+                            );
+                            $alltuples = array(
+                                $tuple
+                            );
+
+                            echo "<h5>Number of interviews this applicant has:<br>";
+
+                            $result = executeBoundSQL("select count(Aid)
+                                                               from Interview
+                                                               where Aid=:bind1", $alltuples);
+
+                            $columnNames = array("Number of interviews");
+                            printTable($result, $columnNames);
+                        }
+
+
+
+    if ($_POST && $success) {
 		//POST-REDIRECT-GET -- See http://en.wikipedia.org/wiki/Post/Redirect/Get
 		header("location: Recruiter.php");
 	} else {
@@ -490,10 +588,11 @@ if ($db_conn) {
         echo "<h5>Recruiter:<br>";
         $result = executePlainSQL("select * from Recruiter");
         $columnNames = array("Recruiter ID", "Name");
+
         printTable($result, $columnNames);
         echo "<h5>Jobs (part-time and full-time):<br>";
         $result = executePlainSQL("select * from Job");
-        $columnNames = array("Job ID", "Title", "Description", "Job Details");
+        $columnNames = array("Job ID", "Title", "Description");
         printTable($result, $columnNames);
 
         echo "<h5>Full-Time Jobs:<br>";
@@ -506,10 +605,38 @@ if ($db_conn) {
         $columnNames = array("Job ID", "Hours");
         printTable($result, $columnNames);
 
+        echo "<br>Applicants:<br>";
+        $result = executePlainSQL("select * from Applicant");
+        $columnNames = array("Applicant ID", "Name", "Phone Number", "Address");
+        printTable($result, $columnNames);
+
         echo "<h5>Screening Tests:<br>";
         $result = executePlainSQL("select * from Screentest");
         $columnNames = array("Test ID", "Applicant ID");
         printTable($result, $columnNames);
+
+//        echo "<h5>Applicants who have applied to every job:<br>";
+//                        $result = executePlainSQL("SELECT a.Aid
+//                                                            FROM Applicant a
+//                                                            WHERE NOT EXISTS
+//                                                            (SELECT * from Job j
+//                                                            WHERE NOT EXISTS
+//                                                            (SELECT ap.Aid, ap.Jid
+//                                                            FROM apply ap
+//                                                            WHERE ap.Aid=a.Aid AND
+//                                                            ap.Jid=j.Jid))");
+
+//        $result = executePlainSQL("SELECT a.Aid
+//                                                                FROM Applicant a
+//                                                                WHERE NOT EXISTS
+//                                                                ((SELECT j.Jid from Job j)
+//                                                                EXCEPT
+//                                                                (select ap.Jid
+//                                                                from Apply ap
+//                                                                where ap.Aid = a.Aid))");
+//
+//        $columnNames = array("Applicants");
+//        printTable($result, $columnNames);
 
 
 	}

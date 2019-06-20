@@ -206,6 +206,7 @@ function printResult($result)
 
 function printTable($resultFromSQL, $namesOfColumnsArray)
 {
+    echo "<br>Here is the output, nicely formatted:<br>";
     echo "<table>";
     echo "<tr>";
     // iterate through the array and print the string contents
@@ -313,19 +314,19 @@ if ($db_conn) {
         header("location: HiringManager.php");
     } else {
         // Select data...
-        echo "<h5>Hiring Managers:<br>";
+        echo "<br>Hiring Managers:<br>";
         $result = executePlainSQL("select * from HM");
         /*printResult($result);*/
         /* next two lines from Raghav replace previous line */
         $columnNames = array("HM ID#", "HM Name", "Department");
         printTable($result, $columnNames);
 
-        echo "<h5>Offers:<br>";
+        echo "<br>Offers:<br>";
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
         printTable($result, $columnNames);
 
-        echo "<h5>Interviews:<br>";
+        echo "<br>Interviews:<br>";
         $result = executePlainSQL("select * from Interview");
         $columnNames = array("HM ID", "Applicant ID", "Time", "Location");
         printTable($result, $columnNames);

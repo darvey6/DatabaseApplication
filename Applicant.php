@@ -52,6 +52,8 @@
 </form>
 
 
+
+
 <html>
 <style>
     table {
@@ -181,7 +183,7 @@ function printResult($result)
 
 function printTable($resultFromSQL, $namesOfColumnsArray)
 {
-
+    echo "<br>Here is the output, nicely formatted:<br>";
     echo "<table>";
     echo "<tr>";
     // iterate through the array and print the string contents
@@ -236,37 +238,38 @@ if ($db_conn) {
             $alltuples = array(
                 $tuple
             );
-            executeBoundSQL("update Applicant set Name=:bind2, Phone=:bind3m, Address=:bind4
+            executeBoundSQL("update Applicant set Name=:bind2, Phone=:bind3, Address=:bind4
                                                             where Aid=:bind1", $alltuples);
             OCICommit($db_conn);
 
 
-        } else
-            if (array_key_exists('apply', $_POST)) {
-                // Update tuple using data from user
-                $tuple = array(
-                    ":bind1" => $_POST['applyaid'],
-                    ":bind2" => $_POST['applyjid'],
-                );
-                $alltuples = array(
-                    $tuple
-                );
-                executeBoundSQL("insert into Apply values (:bind1, :bind2)", $alltuples);
-                OCICommit($db_conn);
+    } else
+        if (array_key_exists('apply', $_POST)) {
+            // Update tuple using data from user
+            $tuple = array(
+                ":bind1" => $_POST['applyaid'],
+                ":bind2" => $_POST['applyjid'],
+            );
+            $alltuples = array(
+                $tuple
+            );
+            executeBoundSQL("insert into Apply values (:bind1, :bind2)", $alltuples);
+            OCICommit($db_conn);
 
-            } else
-                if (array_key_exists('deleteapplicant', $_POST)) {
-                    // Update tuple using data from user
-                    $tuple = array(
-                        ":bind1" => $_POST['deleteaid'],
-                    );
-                    $alltuples = array(
-                        $tuple
-                    );
-                    executeBoundSQL("delete from Applicant where Aid=:bind1", $alltuples);
+    } else
+        if (array_key_exists('deleteapplicant', $_POST)) {
+            // Update tuple using data from user
+            $tuple = array(
+                ":bind1" => $_POST['deleteaid'],
+            );
+            $alltuples = array(
+                $tuple
+            );
+            executeBoundSQL("delete from Applicant where Aid=:bind1", $alltuples);
 
-                    OCICommit($db_conn);
-                }
+            OCICommit($db_conn);
+    }
+
 
     if ($_POST && $success) {
         //POST-REDIRECT-GET -- See http://en.wikipedia.org/wiki/Post/Redirect/Get
@@ -278,22 +281,37 @@ if ($db_conn) {
         $columnNames = array("Applicant ID", "Name", "Phone Number", "Address");
         printTable($result, $columnNames);
 
-        echo "<h5>Application:<br>";
+        echo "<h5>Jobs (part-time and full-time):<br>";
+        $result = executePlainSQL("select * from Job");
+        $columnNames = array("Job ID", "Title", "Description", "Job Details");
+        printTable($result, $columnNames);
+
+        echo "<h5>Full-Time Jobs:<br>";
+        $result = executePlainSQL("select * from Job_Fulltime");
+        $columnNames = array("Job ID", "Benefits");
+        printTable($result, $columnNames);
+
+        echo "<h5>Part-Time Jobs:<br>";
+        $result = executePlainSQL("select * from Job_Parttime");
+        $columnNames = array("Job ID", "Hours");
+        printTable($result, $columnNames);
+
+        echo "<br>Application:<br>";
         $result = executePlainSQL("select * from Apply");
         $columnNames = array("Applicant ID", "Job ID");
         printTable($result, $columnNames);
 
-        echo "<h5>Screen tests:<br>";
+        echo "<br>Screen tests:<br>";
         $result = executePlainSQL("select * from Screentest");
         $columnNames = array("Screen test ID", "Applicant ID");
         printTable($result, $columnNames);
 
-        echo "<h5>Offers:<br>";
+        echo "<br>Offers:<br>";
         $result = executePlainSQL("select * from Offer");
         $columnNames = array("HR ID", "HM ID", "Applicant ID", "Offer ID", "Offer Details");
         printTable($result, $columnNames);
 
-        echo "<h5>Interviews:<br>";
+        echo "<br>Interviews:<br>";
         $result = executePlainSQL("select * from Interview");
         $columnNames = array("HM ID", "Applicant ID", "Time", "Location");
         printTable($result, $columnNames);
