@@ -191,8 +191,7 @@ if ($db_conn) {
         echo "<br> creating job <br>";
         executePlainSQL("create table Job(Jid integer primary key, 
                                                     Title varchar2(20), 
-                                                    Description varchar2(30), 
-                                                    Deadline date)");
+                                                    Description varchar2(30))");
         OCICommit($db_conn);
 
         echo "<br> creating part-time job <br>";
@@ -262,7 +261,8 @@ if ($db_conn) {
                                                         time number, 
                                                         location varchar2(80), 
                                                         primary key (HMid, Aid ,time),
-                                                        foreign key (HMid) references HM on delete cascade)");
+                                                        foreign key (HMid) references HM on delete cascade, 
+                                                        foreign key (Aid) references Applicant on delete cascade)");
         OCICommit($db_conn);
 
 
